@@ -1,0 +1,1895 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="referrer" content="no-referrer">
+<title>한국어 ↔ 日本語 ｜ 双方向フレーズ学習帳</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;600;900&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#e6ece6;
+    --paper-deep:#d8e2da;
+    --card:#ffffff;
+    --ink:#16211c;
+    --ink-soft:#5d6d64;
+    --ink-faint:#8b998f;
+    --line:#c7d5cb;
+    --line-soft:#e1e9e2;
+    --red:#b5372a;
+    --red-deep:#8f2a20;
+    --jade:#2f7d6b;
+    --gold:#9a6b1e;
+    --serif:"Noto Serif KR",serif;
+    --sans:"Noto Sans JP",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+    --r:8px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{-webkit-text-size-adjust:100%}
+  body{font-family:var(--sans);background:var(--paper);color:var(--ink);line-height:1.55;padding:0 0 104px}
+  .wrap{max-width:880px;margin:0 auto;padding:0 16px}
+
+  .masthead{padding:24px 0 16px;border-bottom:2px solid var(--ink)}
+  .masthead h1{font-family:var(--serif);font-weight:900;font-size:1.7rem;letter-spacing:-.01em;line-height:1.25}
+  .masthead h1 .arw{font-family:var(--sans);color:var(--red);font-weight:500;padding:0 .18em;font-size:.8em;vertical-align:.08em}
+  .masthead p{margin-top:6px;font-size:.85rem;color:var(--ink-soft)}
+
+  .switch-block{margin:16px 0 0;background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:14px}
+  .switch-label{font-size:.74rem;color:var(--ink-faint);margin-bottom:8px}
+  .switch-label.second{margin-top:14px}
+  .dir{display:grid;grid-template-columns:1fr 1fr;border:1.5px solid var(--ink);border-radius:6px;overflow:hidden}
+  .dir button{font-family:var(--serif);font-weight:600;font-size:.98rem;padding:12px 8px;background:var(--card);border:none;color:var(--ink-soft);cursor:pointer;transition:background .12s,color .12s}
+  .dir button+button{border-left:1.5px solid var(--ink)}
+  .dir button[aria-pressed="true"]{background:var(--ink);color:#fff}
+  .dir small{display:block;font-family:var(--sans);font-size:.68rem;font-weight:400;opacity:.78;margin-top:2px}
+  #dirSwitch button{font-size:.92rem;padding:11px 6px}
+
+  .modes{display:flex;gap:6px;margin-top:14px}
+  .modes button{flex:1;font-size:.84rem;font-weight:500;padding:9px 4px;background:transparent;border:1px solid var(--line);border-radius:6px;color:var(--ink-soft);cursor:pointer}
+  .modes button[aria-pressed="true"]{background:var(--red);border-color:var(--red);color:#fff;font-weight:700}
+
+  .toolbar{margin-top:14px}
+  .searchrow input{width:100%;font-family:var(--sans);font-size:.95rem;padding:11px 13px;background:var(--card);border:1px solid var(--line);border-radius:6px;color:var(--ink);outline:none}
+  .searchrow input:focus{border-color:var(--jade);box-shadow:0 0 0 3px rgba(47,125,107,.13)}
+  .btnrow{display:flex;gap:6px;margin-top:8px}
+  .ghost{flex:1;font-family:var(--sans);font-size:.82rem;font-weight:500;padding:9px 6px;white-space:nowrap;background:var(--card);border:1px solid var(--line);border-radius:6px;color:var(--ink);cursor:pointer}
+  .ghost[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:#fff}
+
+  .cats{display:flex;gap:6px;overflow-x:auto;padding:12px 0 8px;scrollbar-width:none;position:sticky;top:0;z-index:20;background:linear-gradient(var(--paper) 78%,rgba(230,236,230,0))}
+  .cats::-webkit-scrollbar{display:none}
+  .cats button{white-space:nowrap;font-size:.82rem;padding:7px 13px;background:transparent;border:1px solid var(--line);border-radius:999px;color:var(--ink-soft);cursor:pointer}
+  .cats button[aria-pressed="true"]{background:var(--jade);border-color:var(--jade);color:#fff;font-weight:700}
+
+  .meterrow{display:flex;align-items:center;gap:10px;padding:4px 0 14px;font-size:.76rem;color:var(--ink-soft)}
+  .meter{flex:1;height:5px;background:var(--paper-deep);border-radius:99px;overflow:hidden}
+  .meter i{display:block;height:100%;background:var(--jade);width:0;transition:width .3s}
+  .meterrow .ghost{flex:0 0 auto;font-size:.74rem;padding:5px 9px}
+
+  .entry{display:grid;grid-template-columns:34px 1fr 1fr 42px;background:var(--card);border:1px solid var(--line-soft);border-bottom:none}
+  .entry:first-of-type{border-radius:var(--r) var(--r) 0 0}
+  .entry:last-of-type{border-bottom:1px solid var(--line-soft);border-radius:0 0 var(--r) var(--r)}
+  .entry.done{background:#f4f8f4}
+  .entry.playing{background:#fdf6ec;box-shadow:inset 3px 0 0 var(--gold)}
+  .side{padding:14px 6px;display:flex;flex-direction:column;align-items:center;gap:8px}
+  .side button{background:none;border:none;cursor:pointer;font-size:1.15rem;line-height:1;padding:2px;color:var(--ink-faint)}
+  .side.right{justify-content:flex-start;gap:10px}
+  .side .play{width:34px;height:34px;border:1px solid var(--line);border-radius:8px;background:var(--card);font-size:1rem;display:flex;align-items:center;justify-content:center}
+  .side .play:hover{background:var(--jade);border-color:var(--jade)}
+  .side .star.on{color:#c99a13}
+  .side .chk.on{color:var(--jade)}
+  .entry>.side:first-child{grid-column:1;grid-row:1}
+  .entry>.a-cell{grid-column:2;grid-row:1;padding:13px 10px 13px 2px}
+  .entry>.b-cell{grid-column:3;grid-row:1;padding:13px 6px 13px 14px;border-left:1px solid var(--line-soft)}
+  .entry>.side.right{grid-column:4;grid-row:1}
+  .ko{font-family:var(--serif);font-weight:600;font-size:1.18rem;line-height:1.4;word-break:keep-all}
+  .jp{font-family:var(--sans);font-weight:700;font-size:1.1rem;line-height:1.45}
+  .kana{font-size:.78rem;color:var(--gold);letter-spacing:.02em;margin-top:3px}
+  .hang{font-family:var(--serif);font-size:.8rem;color:var(--jade);margin-top:2px}
+  .plain{font-size:.97rem;font-weight:500;word-break:break-word}
+  .plain.ko-plain{font-family:var(--serif);font-weight:600;font-size:1.05rem}
+  .tip{font-size:.76rem;color:var(--ink-soft);margin-top:4px}
+  .mask{width:100%;text-align:left;font-family:var(--sans);font-size:.82rem;color:var(--ink-faint);background:repeating-linear-gradient(45deg,#eef2ee,#eef2ee 6px,#e6ece6 6px,#e6ece6 12px);border:1px dashed var(--line);border-radius:5px;padding:12px 10px;cursor:pointer}
+  .mask:hover{color:var(--ink)}
+
+  .empty{background:var(--card);border:1px solid var(--line-soft);border-radius:var(--r);padding:44px 20px;text-align:center;color:var(--ink-soft);font-size:.9rem}
+  .empty b{display:block;font-size:1rem;color:var(--ink);margin-bottom:6px}
+  .foot{display:flex;justify-content:space-between;gap:12px;margin-top:12px;font-size:.76rem;color:var(--ink-faint)}
+
+  .card-stage{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:26px 20px 20px;text-align:center;min-height:250px;display:flex;flex-direction:column;justify-content:center}
+  .card-idx{font-size:.74rem;color:var(--ink-faint);margin-bottom:14px}
+  .card-q{font-family:var(--serif);font-weight:900;font-size:1.8rem;line-height:1.35;word-break:keep-all}
+  .card-q.jp-q{font-family:var(--sans);font-weight:900;font-size:1.5rem}
+  .card-sub{font-size:.88rem;color:var(--gold);margin-top:8px}
+  .card-sub.h{font-family:var(--serif);color:var(--jade);font-size:.85rem;margin-top:2px}
+  .card-rule{width:44px;height:2px;background:var(--line);margin:18px auto}
+  .card-a{font-size:1.2rem;font-weight:500}
+  .card-a .ko{font-size:1.55rem}
+  .card-a .jp{font-size:1.35rem}
+  .card-tip{font-size:.82rem;color:var(--ink-soft);margin-top:10px}
+  .card-hint{font-size:.8rem;color:var(--ink-faint)}
+  .card-bar{display:flex;gap:8px;margin-top:12px}
+  .card-bar button{flex:1;font-size:.9rem;font-weight:700;padding:14px 6px;border-radius:6px;border:1px solid var(--line);background:var(--card);color:var(--ink);cursor:pointer}
+  .card-bar .know{background:var(--jade);border-color:var(--jade);color:#fff}
+  .card-bar .again{background:var(--red);border-color:var(--red);color:#fff}
+  .card-bar .dark{background:var(--ink);border-color:var(--ink);color:#fff}
+  .card-nav{display:flex;gap:8px;margin-top:8px}
+  .card-nav button{flex:1;font-size:.84rem;padding:10px;border-radius:6px;border:1px solid var(--line);background:transparent;color:var(--ink-soft);cursor:pointer}
+
+  .quiz-stage{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:20px}
+  .quiz-top{display:flex;justify-content:space-between;font-size:.74rem;color:var(--ink-faint);margin-bottom:12px}
+  .quiz-q{font-family:var(--serif);font-weight:900;font-size:1.55rem;text-align:center;padding:10px 0 4px;word-break:keep-all}
+  .quiz-q.jp-q{font-family:var(--sans);font-weight:900;font-size:1.3rem}
+  .quiz-sub{text-align:center;font-size:.8rem;color:var(--gold);margin-bottom:16px}
+  .opt{display:block;width:100%;text-align:left;margin-top:8px;padding:13px 14px;border:1px solid var(--line);border-radius:6px;background:var(--card);cursor:pointer;font-family:var(--sans);font-size:.95rem;color:var(--ink);line-height:1.4}
+  .opt .opt-ko{font-family:var(--serif);font-weight:600;font-size:1.05rem}
+  .opt .opt-jp{font-weight:700;font-size:1.02rem}
+  .opt:hover{border-color:var(--jade)}
+  .opt.right{background:#eaf4f0;border-color:var(--jade);font-weight:700}
+  .opt.wrong{background:#fbecea;border-color:var(--red)}
+  .quiz-fb{margin-top:14px;font-size:.86rem;color:var(--ink-soft);min-height:22px}
+  .result{text-align:center;padding:20px 6px}
+  .result .score{font-family:var(--serif);font-weight:900;font-size:3rem;color:var(--jade);line-height:1}
+  .result p{font-size:.9rem;color:var(--ink-soft);margin:10px 0 18px}
+  .btn-main{font-size:.92rem;font-weight:700;padding:13px 22px;background:var(--red);color:#fff;border:none;border-radius:6px;cursor:pointer}
+  .btn-main:hover{background:var(--red-deep)}
+
+  .audiobar{position:fixed;left:0;right:0;bottom:0;background:rgba(22,33,28,.97);color:#dfe8e2;padding:9px 14px;z-index:50}
+  .audiobar .wrapbar{max-width:880px;margin:0 auto;display:flex;align-items:center;gap:8px;width:100%;flex-wrap:wrap}
+  .audiobar button{font-family:var(--sans);font-size:.8rem;font-weight:600;padding:8px 11px;border-radius:5px;border:1px solid #46564d;background:transparent;color:#dfe8e2;cursor:pointer}
+  .audiobar button.on{background:var(--red);border-color:var(--red);color:#fff}
+  .audiobar select{font-family:var(--sans);font-size:.76rem;padding:6px 6px;border-radius:5px;border:1px solid #46564d;background:#22322b;color:#dfe8e2;outline:none;max-width:8.5em}
+  .audiobar .grow{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:#9fb3a7;font-size:.75rem}
+  .audiobar .warn{color:#f0b8a8}
+  .helppanel{display:none;max-width:880px;margin:0 auto;padding:10px 2px 4px;font-size:.76rem;line-height:1.6;color:#bccdc3;max-height:46vh;overflow:auto}
+  .helppanel.open{display:block}
+  .helppanel b{color:#fff}
+
+  a{color:var(--jade)}
+  button:focus-visible,input:focus-visible,select:focus-visible{outline:2px solid var(--red);outline-offset:2px}
+  @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+
+  @media (max-width:620px){
+    .masthead h1{font-size:1.4rem}
+    .entry{grid-template-columns:30px 1fr 42px}
+    .entry>.side:first-child{grid-column:1;grid-row:1}
+    .entry>.a-cell{grid-column:2;grid-row:1;padding:12px 6px 6px 2px}
+    .entry>.side.right{grid-column:3;grid-row:1}
+    .entry>.b-cell{grid-column:1/4;grid-row:2;border-left:none;border-top:1px dashed var(--line-soft);padding:9px 12px 13px 38px}
+    .side{padding:12px 4px 6px}
+    .card-q{font-size:1.5rem}
+    .audiobar{padding:8px 10px}
+    .audiobar .grow{flex:1 1 100%;order:9;white-space:normal;line-height:1.35}
+    .audiobar button{padding:8px 9px;font-size:.76rem}
+    .audiobar select{font-size:.7rem;max-width:5.4em;padding:6px 2px}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="masthead">
+    <h1>한국어<span class="arw">↔</span>日本語</h1>
+    <p id="subtitle"></p>
+  </header>
+
+  <section class="switch-block">
+    <div class="switch-label" id="lblLearner"></div>
+    <div class="dir" id="uiSwitch">
+      <button data-ui="ja" aria-pressed="true">한국어 학습<small id="uiSubJa"></small></button>
+      <button data-ui="ko" aria-pressed="false">일본어 학습<small id="uiSubKo"></small></button>
+    </div>
+    <div class="switch-label second" id="lblDir"></div>
+    <div class="dir" id="dirSwitch">
+      <button data-dir="t2n" aria-pressed="true"><span id="dirA"></span><small id="dirAs"></small></button>
+      <button data-dir="n2t" aria-pressed="false"><span id="dirB"></span><small id="dirBs"></small></button>
+    </div>
+    <div class="modes" id="modeSwitch">
+      <button data-mode="list" aria-pressed="true"></button>
+      <button data-mode="card" aria-pressed="false"></button>
+      <button data-mode="quiz" aria-pressed="false"></button>
+    </div>
+  </section>
+
+  <div class="toolbar">
+    <div class="searchrow"><input id="q" type="search" autocomplete="off"></div>
+    <div class="btnrow">
+      <button class="ghost" id="maskBtn" aria-pressed="false"></button>
+      <button class="ghost" id="shuffleBtn" aria-pressed="false"></button>
+      <button class="ghost" id="tipBtn" aria-pressed="true"></button>
+    </div>
+    <nav class="cats" id="cats"></nav>
+    <div class="meterrow">
+      <span id="meterLabel"></span>
+      <span class="meter"><i id="meterFill"></i></span>
+      <button class="ghost" id="resetBtn"></button>
+    </div>
+  </div>
+
+  <main id="stage"></main>
+  <div class="foot">
+    <span id="footLeft"></span>
+    <span id="footRight"></span>
+  </div>
+</div>
+
+<div class="audiobar">
+  <div class="wrapbar">
+    <button id="autoBtn"></button>
+    <select id="voiceMode"><option value="target"></option><option value="both"></option></select>
+    <select id="rate">
+      <option value="0.7">0.7x</option><option value="0.85">0.85x</option>
+      <option value="1" selected>1.0x</option><option value="1.2">1.2x</option>
+    </select>
+    <select id="engine">
+      <option value="google" selected></option><option value="auto"></option><option value="local"></option>
+    </select>
+    <span class="grow" id="audioStatus"></span>
+    <button id="helpBtn">?</button>
+  </div>
+  <div class="helppanel" id="helpPanel"></div>
+</div>
+
+<script>
+/* ==========================================================
+   データ: [id, カテゴリ, 韓国語, カナ発音, 日本語, 解説, (日本語の読み)]
+   ========================================================== */
+const RAW = [
+// ---------- 挨拶・基本 ----------
+[1,"daily","안녕하세요","アンニョンハセヨ","こんにちは","朝昼晩いつでも使える基本の挨拶"],
+[2,"daily","안녕","アンニョン","やっほー／じゃあね","タメ口。会う時も別れる時も同じ"],
+[3,"daily","감사합니다","カムサハムニダ","ありがとうございます","一番かたい感謝の言葉"],
+[4,"daily","고맙습니다","コマプスムニダ","ありがとうございます","감사합니다より少しやわらかい"],
+[5,"daily","고마워","コマウォ","ありがとう","友達や年下に"],
+[6,"daily","정말 감사합니다","チョンマル カムサハムニダ","本当にありがとうございます","感謝を強めたい時"],
+[7,"daily","죄송합니다","チェソンハムニダ","申し訳ありません","目上の人・仕事で"],
+[8,"daily","미안해요","ミアネヨ","ごめんなさい","親しい相手への軽い謝罪"],
+[9,"daily","미안해","ミアネ","ごめん","タメ口"],
+[10,"daily","괜찮아요","ケンチャナヨ","大丈夫です／結構です","断る時にも使える万能語"],
+[11,"daily","괜찮아","ケンチャナ","大丈夫だよ","相手を安心させる一言"],
+[12,"daily","네","ネ","はい","かしこまった場では예（イェ）も使う"],
+[13,"daily","아니요","アニヨ","いいえ","丁寧な否定"],
+[14,"daily","맞아요","マジャヨ","そうです","相手の言葉を肯定する"],
+[15,"daily","아니에요","アニエヨ","違います／とんでもないです","否定にも謙遜にも使う"],
+[16,"daily","수고하셨습니다","スゴハショッスムニダ","お疲れ様でした","仕事終わりや帰り際に"],
+[17,"daily","수고하세요","スゴハセヨ","お疲れ様です","まだ働いている相手に声をかけて去る時"],
+[18,"daily","안녕히 계세요","アンニョンヒ ケセヨ","さようなら","自分がその場を出ていく時"],
+[19,"daily","안녕히 가세요","アンニョンヒ カセヨ","さようなら","相手を見送る時"],
+[20,"daily","잘 부탁드립니다","チャル プタクトゥリムニダ","よろしくお願いします","初対面や依頼の時"],
+[21,"daily","처음 뵙겠습니다","チョウム ペプケッスムニダ","はじめまして","かしこまった初対面"],
+[22,"daily","만나서 반갑습니다","マンナソ パンガプスムニダ","お会いできてうれしいです","自己紹介にセットで"],
+[23,"daily","오랜만이에요","オレンマニエヨ","お久しぶりです","오래간만이에요の縮約"],
+[24,"daily","잘 지냈어요?","チャル チネッソヨ？","お元気でしたか？","再会した時の定番"],
+[25,"daily","잘 지내지?","チャル チネジ？","元気にしてる？","友達に軽く聞く"],
+[26,"daily","덕분에 잘 지내요","トップネ チャル チネヨ","おかげさまで元気です","気遣いへの返事"],
+[27,"daily","이름이 뭐예요?","イルミ ムォエヨ？","お名前は何ですか？","親しい相手や同年代に"],
+[28,"daily","성함이 어떻게 되세요?","ソンハミ オットケ トェセヨ？","お名前を伺えますか？","敬語。仕事や年上に"],
+[29,"daily","저는 일본 사람이에요","チョヌン イルボン サラミエヨ","私は日本人です","自己紹介の基本"],
+[30,"daily","한국말 조금 할 수 있어요","ハングンマル チョグム ハル ス イッソヨ","韓国語が少し話せます","会話の入り口として便利"],
+[31,"daily","한국말 잘 못해요","ハングンマル チャル モテヨ","韓国語はうまく話せません","相手が気遣ってくれる"],
+[32,"daily","천천히 말해 주세요","チョンチョニ マレ ジュセヨ","ゆっくり話してください","聞き取れない時の必須フレーズ"],
+[33,"daily","다시 한 번 말해 주세요","タシ ハンボン マレ ジュセヨ","もう一度言ってください","聞き返す時"],
+[34,"daily","무슨 뜻이에요?","ムスン ットゥシエヨ？","どういう意味ですか？","知らない単語が出た時"],
+[35,"daily","알겠습니다","アルゲッスムニダ","わかりました","理解・了解を伝える"],
+[36,"daily","알았어","アラッソ","わかった","タメ口"],
+[37,"daily","모르겠어요","モルゲッソヨ","わかりません","知らない・判断できない時"],
+[38,"daily","잠시만요","チャムシマンニョ","少しお待ちください","人の前を通る時にも使う"],
+[39,"daily","천만에요","チョンマネヨ","どういたしまして","お礼への返し"],
+[40,"daily","별말씀을요","ピョルマルッスムリョ","とんでもないです","謙遜した返し"],
+[41,"daily","실례합니다","シルレハムニダ","失礼します","声をかける前に"],
+[42,"daily","부탁이 있어요","プタギ イッソヨ","お願いがあります","切り出しの一言"],
+[43,"daily","도와주세요","トワジュセヨ","助けてください","困った時に最優先で覚える"],
+[44,"daily","좋은 하루 보내세요","チョウン ハル ポネセヨ","良い一日を","別れ際に添えると好印象"],
+[45,"daily","잘 자요","チャル ジャヨ","おやすみなさい","寝る前の挨拶"],
+[46,"daily","잘 자","チャル ジャ","おやすみ","タメ口"],
+[47,"daily","좋은 꿈 꿔","チョウン クム クォ","いい夢見てね","親しい相手に"],
+[48,"daily","다녀오겠습니다","タニョオゲッスムニダ","行ってきます","家を出る時"],
+[49,"daily","다녀왔습니다","タニョワッスムニダ","ただいま","帰宅した時"],
+[50,"daily","생일 축하해요","センイル チュカヘヨ","お誕生日おめでとう","歌の歌詞でもおなじみ"],
+[51,"daily","축하해요","チュカヘヨ","おめでとうございます","合格・結婚など全般に"],
+[52,"daily","화이팅!","ファイティン！","がんばれ！","파이팅とも書く。応援の定番"],
+[53,"daily","잘 먹었습니다","チャル モゴッスムニダ","ごちそうさまでした","食べ終わりの挨拶"],
+[54,"daily","몇 살이에요?","ミョッ サリエヨ？","何歳ですか？","韓国では年齢確認が会話の入口"],
+[55,"daily","어디 살아요?","オディ サラヨ？","どこに住んでいますか？","距離を縮める質問"],
+
+// ---------- 友達・タメ口・スラング ----------
+[101,"friend","뭐 해?","ムォ ヘ？","何してる？","カカオトークの第一声"],
+[102,"friend","밥 먹었어?","パプ モゴッソ？","ご飯食べた？","挨拶代わりの気遣い"],
+[103,"friend","어디야?","オディヤ？","今どこ？","待ち合わせの定番"],
+[104,"friend","지금 가고 있어","チグム カゴ イッソ","今向かってる","移動中の返事"],
+[105,"friend","조금 늦을 것 같아","チョグム ヌジュル ゴッ カッタ","少し遅れそう","連絡は早めに"],
+[106,"friend","진짜?","チンチャ？","まじで？","驚いた時の相槌"],
+[107,"friend","정말?","チョンマル？","本当？","진짜より少し丁寧"],
+[108,"friend","대박","テバク","やば／すごい","良い意味も悪い意味も表せる"],
+[109,"friend","헐","ホル","えっ…","絶句した時に漏れる一言"],
+[110,"friend","완전","ワンジョン","超／めっちゃ","완전 맛있어＝超おいしい"],
+[111,"friend","진짜 짜증나","チンチャ チャジュンナ","本当にイライラする","愚痴の定番"],
+[112,"friend","킹받네","キンバンネ","ムカつく（笑）","king＋열받네の造語。若者言葉"],
+[113,"friend","꿀잼","クルジェム","超おもしろい","꿀（蜜）＋잼（面白さ）"],
+[114,"friend","노잼","ノジェム","おもしろくない","no＋잼"],
+[115,"friend","미쳤다","ミチョッタ","やばい","感動でも呆れでも使う"],
+[116,"friend","인싸","インッサ","陽キャ・人気者","insiderの略"],
+[117,"friend","아싸","アッサ","陰キャ・ぼっち","outsiderの略"],
+[118,"friend","맞아 맞아","マジャマジャ","そうそう","強い共感"],
+[119,"friend","내 말이","ネ マリ","ほんとそれ","「それが言いたかった」の意"],
+[120,"friend","그니까","クニッカ","だよね","그러니까の短縮形"],
+[121,"friend","몰라","モルラ","知らない","投げやりにも使える"],
+[122,"friend","귀찮아","クィチャナ","めんどくさい","独り言でよく出る"],
+[123,"friend","어떡해","オットケ","どうしよう","焦り・心配の定番"],
+[124,"friend","웃겨 죽겠어","ウッキョ チュッケッソ","笑いすぎて死ぬ","面白すぎた時"],
+[125,"friend","배꼽 빠지겠다","ペッコプ パジゲッタ","お腹がちぎれるほど笑える","へそが取れる、という表現"],
+[126,"friend","놀자!","ノルジャ！","遊ぼう！","誘う時"],
+[127,"friend","언제 시간 돼?","オンジェ シガン トェ？","いつ空いてる？","予定を合わせる"],
+[128,"friend","나 오늘 좀 피곤해","ナ オヌル チョム ピゴネ","今日ちょっと疲れてる","やわらかく断る言い方"],
+[129,"friend","카톡해","カトッケ","カカオしてね","別れ際の一言"],
+[130,"friend","답장 좀 해줘","タプチャン チョム ヘジョ","返信してよ","催促"],
+[131,"friend","읽고 씹지 마","イルコ シプチ マ","既読スルーしないで","읽씹＝既読スルー"],
+[132,"friend","잠수 탔어?","チャムス タッソ？","音信不通だったの？","「潜水した」が語源"],
+[133,"friend","아무거나","アムゴナ","何でもいいよ","メニュー決めで頻出"],
+[134,"friend","알아서 해","アラソ ヘ","好きにして","少し冷たく響くので注意"],
+[135,"friend","진심?","チンシム？","本気で？","真意を確認する"],
+[136,"friend","개좋아","ケジョア","めっちゃ好き","개は「超」の俗語。親しい間だけ"],
+[137,"friend","존맛","チョンマッ","超うま","JMTと略して書くことも"],
+[138,"friend","사이다","サイダ","スッキリする展開","炭酸のように胸がすくこと"],
+[139,"friend","고구마","コグマ","もどかしい展開","さつまいもで喉が詰まる感じから"],
+[140,"friend","오랜만!","オレンマン！","久しぶり！","タメ口版"],
+[141,"friend","나중에 봐","ナジュンエ ボァ","またあとで","軽い別れの挨拶"],
+[142,"friend","다음에 또 보자","タウメ ット ポジャ","また今度会おう","社交辞令にもなる"],
+[143,"friend","잘 가","チャル ガ","じゃあね","相手を見送る側"],
+[144,"friend","먼저 갈게","モンジョ カルケ","先に帰るね","飲み会で抜ける時"],
+[145,"friend","사진 보내줘","サジン ポネジョ","写真送って","撮ってもらった後に"],
+[146,"friend","별로야","ピョルロヤ","いまいち","正直な感想"],
+[147,"friend","완전 내 스타일","ワンジョン ネ スタイル","めっちゃ好みのタイプ","人にも物にも使える"],
+[148,"friend","어쩔 수 없지","オッチョル ス オプチ","しょうがないね","あきらめの一言"],
+[149,"friend","그럴 수도 있지","クロル スド イッチ","そういうこともあるよ","慰める時"],
+[150,"friend","대충 하자","テチュン ハジャ","適当にやろう","気楽な提案"],
+// ---------- 推し活・SNS ----------
+[201,"kpop","최애","チェエ","推し（一番好きな人）","最愛が語源"],
+[202,"kpop","차애","チャエ","2番目の推し","次愛が語源"],
+[203,"kpop","덕질","トクチル","オタ活・推し活","オタク活動全般"],
+[204,"kpop","입덕","イプトク","沼落ち・ファンになること","덕후（オタク）に入る"],
+[205,"kpop","탈덕","タルトク","ファンをやめること","ペン卒"],
+[206,"kpop","성덕","ソンドク","成功したオタク","推しに認知された人"],
+[207,"kpop","덕통사고","トクトンサゴ","突然の沼落ち","덕질＋交通事故の造語"],
+[208,"kpop","팬싸","ペンッサ","ファンサイン会","팬사인회の略"],
+[209,"kpop","직캠","チッケム","推しだけを追った動画","直撮りカメラの略"],
+[210,"kpop","포카","ポカ","トレカ（フォトカード）","포토카드の略"],
+[211,"kpop","스밍","スミン","ストリーミング再生","チャート上げのための活動"],
+[212,"kpop","존버","チョンボ","ひたすら耐えて待つ","チケット待機の合言葉"],
+[213,"kpop","광클","クァンクル","狂ったように連打する","チケッティングの必須技"],
+[214,"kpop","컴백","コムベク","カムバック（新曲発売）","컴백 축하해요＝カムバおめでとう"],
+[215,"kpop","응원봉","ウンウォンボン","ペンライト","公式の応援グッズ"],
+[216,"kpop","실물 깡패","シルムル カンペ","実物が反則級にきれい","映像より本人がすごい時"],
+[217,"kpop","심쿵","シムクン","胸キュン","心臓がドクンとする様子"],
+[218,"kpop","꽃길만 걷자","コッキルマン コッチャ","花道だけ歩こうね","幸せでいてという願い"],
+[219,"kpop","노래 너무 좋아요","ノレ ノム チョアヨ","歌が本当に良いです","感想コメントの定番"],
+[220,"kpop","오늘 무대 최고였어요","オヌル ムデ チェゴヨッソヨ","今日のステージ最高でした","公演後のコメント"],
+[221,"kpop","오빠 너무 멋있어요","オッパ ノム モシッソヨ","オッパすごくかっこいいです","女性が年上男性へ"],
+[222,"kpop","언니 너무 예뻐요","オンニ ノム イェッポヨ","オンニすごくきれいです","女性が年上女性へ"],
+[223,"kpop","저 일본에서 왔어요","チョ イルボネソ ワッソヨ","日本から来ました","ファンサ・イベントで"],
+[224,"kpop","한국어 공부하고 있어요","ハングゴ コンブハゴ イッソヨ","韓国語を勉強しています","話しかける口実にも"],
+[225,"kpop","사인 해주세요","サイン ヘジュセヨ","サインしてください","色紙やアルバムを渡しながら"],
+[226,"kpop","같이 사진 찍어도 돼요?","カッチ サジン チゴド トェヨ？","一緒に写真撮ってもいいですか？","許可を求める言い方"],
+[227,"kpop","손하트 해주세요","ソンハトゥ ヘジュセヨ","指ハートしてください","ファンサのおねだり"],
+[228,"kpop","건강 챙기세요","コンガン チェンギセヨ","体に気をつけてください","推しへの気遣い"],
+[229,"kpop","무리하지 마세요","ムリハジ マセヨ","無理しないでください","スケジュールが過密な時に"],
+[230,"kpop","오늘도 수고했어요","オヌルド スゴヘッソヨ","今日もお疲れ様でした","毎日送りたい一言"],
+[231,"kpop","영원히 응원할게요","ヨンウォニ ウンウォンハルケヨ","ずっと応援します","手紙の結びに"],
+[232,"kpop","티켓팅 성공했어요","ティケッティン ソンゴンヘッソヨ","チケット取れました","争奪戦を勝ち抜いた報告"],
+[233,"kpop","자리 진짜 좋아요","チャリ チンチャ チョアヨ","席が本当にいいです","座席自慢"],
+[234,"kpop","굿즈 사고 싶어요","グッジュ サゴ シポヨ","グッズが買いたいです","会場で使える"],
+[235,"kpop","눈 마주쳤어요","ヌン マジュチョッソヨ","目が合いました","ファンの最高の瞬間"],
+[236,"kpop","무대 영상 봤어?","ムデ ヨンサン ポァッソ？","ステージ映像見た？","ファン同士の会話"],
+[237,"kpop","앨범 예약했어","アルボム イェヤッケッソ","アルバム予約した","発売前の話題"],
+[238,"kpop","콘서트 가고 싶다","コンソトゥ カゴ シプタ","コンサート行きたい","独り言っぽい語尾"],
+[239,"kpop","이번 컨셉 너무 좋아","イボン コンセプ ノム チョア","今回のコンセプト最高","カムバ期の感想"],
+[240,"kpop","춤 진짜 잘 추네","チュム チンチャ チャル チュネ","ダンスが本当に上手だね","感心した時"],
+
+// ---------- 恋人・親密 ----------
+[301,"lover","보고 싶어","ポゴ シポ","会いたい","一日に何度も使われる言葉"],
+[302,"lover","사랑해","サランヘ","愛してる","まっすぐな愛情表現"],
+[303,"lover","자기야","チャギヤ","ねえ（ダーリン）","恋人の定番の呼びかけ"],
+[304,"lover","오빠 / 누나","オッパ／ヌナ","お兄さん／お姉さん","年上の恋人を呼ぶ甘い呼称"],
+[305,"lover","첫눈에 반했어","チョンヌネ パネッソ","一目惚れしたんだ","告白の決め台詞"],
+[306,"lover","우리 사귈래?","ウリ サグィルレ？","付き合わない？","交際を申し込む定番"],
+[307,"lover","나 좋아해?","ナ チョアヘ？","私のこと好き？","確かめたい時"],
+[308,"lover","내가 더 좋아해","ネガ ト チョアヘ","私のほうがもっと好き","好きと言われた返し"],
+[309,"lover","오늘 너무 예쁘다","オヌル ノム イェップダ","今日すごくかわいいね","待ち合わせで最初に"],
+[310,"lover","오늘 멋있다","オヌル モシッタ","今日かっこいいね","彼氏を褒める時"],
+[311,"lover","손잡아도 돼?","ソンジャバド トェ？","手つないでもいい？","初々しいデートで"],
+[312,"lover","안아줘","アナジョ","抱きしめて","甘えたい時"],
+[313,"lover","데이트하자","テイトゥハジャ","デートしよう","誘い方"],
+[314,"lover","영화 보러 갈래?","ヨンファ ポロ カルレ？","映画観に行かない？","定番の誘い文句"],
+[315,"lover","데려다줄게","テリョダジュルケ","送っていくよ","家まで送る時"],
+[316,"lover","조심히 와","チョシミ ワ","気をつけて来てね","待っている側から"],
+[317,"lover","집에 조심히 가","チベ チョシミ カ","気をつけて帰ってね","別れ際の気遣い"],
+[318,"lover","도착하면 연락해","トチャッカミョン ヨルラッケ","着いたら連絡して","心配している気持ち"],
+[319,"lover","전화할게","チョナハルケ","電話するね","約束の一言"],
+[320,"lover","목소리 듣고 싶었어","モクソリ トゥッコ シポッソ","声が聞きたかった","電話の最初に"],
+[321,"lover","많이 보고 싶었어","マニ ポゴ シポッソ","すごく会いたかった","再会した瞬間に"],
+[322,"lover","너밖에 없어","ノバッケ オプソ","君しかいないよ","強い愛情表現"],
+[323,"lover","평생 함께하자","ピョンセン ハムッケハジャ","一生一緒にいよう","プロポーズ級の言葉"],
+[324,"lover","내 꿈 꿔","ネ クム クォ","私の夢見てね","おやすみのお決まり"],
+[325,"lover","밥 잘 챙겨 먹어","パプ チャル チェンギョ モゴ","ご飯ちゃんと食べてね","韓国らしい愛情表現"],
+[326,"lover","아프지 마","アプジ マ","体調崩さないでね","心配している時"],
+[327,"lover","질투 나","チルトゥ ナ","嫉妬しちゃう","かわいく拗ねる"],
+[328,"lover","삐졌어?","ピジョッソ？","拗ねてるの？","機嫌をうかがう"],
+[329,"lover","화 났어?","ファ ナッソ？","怒ってる？","空気が重い時"],
+[330,"lover","미안해, 내가 잘못했어","ミアネ、ネガ チャルモテッソ","ごめん、私が悪かった","素直に謝る"],
+[331,"lover","우리 화해하자","ウリ ファヘハジャ","仲直りしよう","ケンカのあとに"],
+[332,"lover","오늘 하루 어땠어?","オヌル ハル オッテッソ？","今日どんな一日だった？","毎日の会話の入り口"],
+[333,"lover","푹 자","プク チャ","ゆっくり寝てね","やさしいおやすみ"],
+[334,"lover","항상 고마워","ハンサン コマウォ","いつもありがとう","感謝を伝える"],
+[335,"lover","우리 사진 찍자","ウリ サジン チクチャ","ふたりで写真撮ろう","思い出づくり"],
+[336,"lover","사랑한다고 말해줘","サランハンダゴ マレジョ","愛してるって言って","甘えるおねだり"],
+
+// ---------- 食事・カフェ・飲み会 ----------
+[401,"food","여기요!","ヨギヨ！","すみません！","店員さんを呼ぶ時"],
+[402,"food","몇 분이세요?","ミョッ プニセヨ？","何名様ですか？","店員に聞かれる言葉"],
+[403,"food","두 명이요","トゥ ミョンイヨ","2人です","人数の答え方"],
+[404,"food","자리 있어요?","チャリ イッソヨ？","席ありますか？","入店時"],
+[405,"food","예약했어요","イェヤッケッソヨ","予約しています","名前を添えて伝える"],
+[406,"food","메뉴판 좀 주세요","メニュパン チョム ジュセヨ","メニューをください","席に着いたら"],
+[407,"food","주문할게요","チュムナルケヨ","注文します","決まった合図"],
+[408,"food","추천해 주세요","チュチョネ ジュセヨ","おすすめを教えてください","迷った時の魔法の一言"],
+[409,"food","제일 인기 있는 게 뭐예요?","チェイル インキ インヌン ゲ ムォエヨ？","一番人気は何ですか？","初めての店で"],
+[410,"food","이거 2인분 주세요","イゴ イインブン ジュセヨ","これを2人前ください","2人前からの店が多い"],
+[411,"food","이거 매워요?","イゴ メウォヨ？","これ辛いですか？","注文前の確認"],
+[412,"food","안 매운 거 있어요?","アン メウン ゴ イッソヨ？","辛くないものはありますか？","辛さが苦手な人に必須"],
+[413,"food","조금 덜 맵게 해주세요","チョグム トル メプケ ヘジュセヨ","辛さを控えめにしてください","調整のお願い"],
+[414,"food","고수 빼주세요","コス ペジュセヨ","パクチー抜いてください","苦手な具材を抜く言い方"],
+[415,"food","아이스 아메리카노 주세요","アイス アメリカノ ジュセヨ","アイスアメリカーノください","「아아」と略される国民的ドリンク"],
+[416,"food","따뜻한 라떼 주세요","ッタットゥタン ラッテ ジュセヨ","ホットラテください","따뜻한＝温かい"],
+[417,"food","사이즈 업 해주세요","サイジュ オプ ヘジュセヨ","サイズアップしてください","大きいサイズに変更"],
+[418,"food","얼음 조금만 넣어주세요","オルム チョグムマン ノオジュセヨ","氷少なめにしてください","カフェで便利"],
+[419,"food","시럽 빼주세요","シロプ ペジュセヨ","シロップ抜いてください","甘さ調整"],
+[420,"food","샷 추가해 주세요","シャッ チュガヘ ジュセヨ","ショット追加してください","濃くしたい時"],
+[421,"food","테이크아웃 할게요","テイクアウッ ハルケヨ","持ち帰りにします","포장할게요も同じ意味"],
+[422,"food","먹고 갈게요","モッコ カルケヨ","店内で食べます","イートイン"],
+[423,"food","물 좀 주세요","ムル チョム ジュセヨ","お水ください","セルフの店も多い"],
+[424,"food","반찬 좀 더 주세요","パンチャン チョム ト ジュセヨ","おかずをもう少しください","おかずのおかわりは無料"],
+[425,"food","앞접시 주세요","アプチョプシ ジュセヨ","取り皿ください","鍋料理で活躍"],
+[426,"food","물티슈 있어요?","ムルティシュ イッソヨ？","おしぼりありますか？","手が汚れる料理で"],
+[427,"food","소주 한 병 주세요","ソジュ ハンビョン ジュセヨ","焼酎1本ください","飲み会の始まり"],
+[428,"food","맥주 두 잔 주세요","メクチュ トゥジャン ジュセヨ","ビール2杯ください","잔＝杯"],
+[429,"food","한 잔 더 주세요","ハンジャン ト ジュセヨ","もう一杯ください","追加注文"],
+[430,"food","짠!","ッチャン！","乾杯！","グラスを合わせる音から"],
+[431,"food","건배!","コンベ！","乾杯！","かしこまった席で"],
+[432,"food","맛있게 드세요","マシッケ トゥセヨ","おいしく召し上がってください","店員も客も使う"],
+[433,"food","잘 먹겠습니다","チャル モッケッスムニダ","いただきます","食べる前に"],
+[434,"food","진짜 맛있다!","チンチャ マシッタ！","めっちゃおいしい！","食べた瞬間の感想"],
+[435,"food","배불러요","ペブルロヨ","お腹いっぱいです","もう食べられない時"],
+[436,"food","남은 거 포장해 주세요","ナムン ゴ ポジャンヘ ジュセヨ","残りを包んでください","持ち帰りのお願い"],
+[437,"food","계산해 주세요","ケサネ ジュセヨ","お会計お願いします","レジは出口付近が多い"],
+[438,"food","따로따로 계산할게요","タロタロ ケサナルケヨ","別々に払います","割り勘の時"],
+[439,"food","제가 살게요","チェガ サルケヨ","私がおごります","내가 쏠게はタメ口版"],
+[440,"food","카드로 할게요","カドゥロ ハルケヨ","カードで払います","韓国はカード社会"],
+[441,"food","화장실이 어디예요?","ファジャンシリ オディエヨ？","トイレはどこですか？","店でも街でも必須"],
+[442,"food","리필 돼요?","リピル トェヨ？","おかわりできますか？","ドリンクやスープに"],
+// ---------- 旅行・買い物・交通 ----------
+[501,"travel","얼마예요?","オルマエヨ？","いくらですか？","買い物の基本"],
+[502,"travel","비싸요","ピッサヨ","高いです","値段に驚いた時"],
+[503,"travel","조금 깎아 주세요","チョグム カッカ ジュセヨ","少し安くしてください","市場での値切り交渉"],
+[504,"travel","이거 입어봐도 돼요?","イゴ イボボァド トェヨ？","これ試着してもいいですか？","服屋で"],
+[505,"travel","다른 색상도 있어요?","タルン セクサンド イッソヨ？","他の色もありますか？","色違いを探す"],
+[506,"travel","더 큰 사이즈 있어요?","ト クン サイジュ イッソヨ？","もっと大きいサイズありますか？","작은＝小さい に替えても使える"],
+[507,"travel","새 상품으로 주세요","セ サンプムロ ジュセヨ","新品をください","展示品を避けたい時"],
+[508,"travel","그냥 구경하는 거예요","クニャン クギョンハヌン ゴエヨ","見ているだけです","声をかけられた時の返し"],
+[509,"travel","이거 보여주세요","イゴ ポヨジュセヨ","これ見せてください","ケースの中の商品に"],
+[510,"travel","카드 돼요?","カドゥ トェヨ？","カード使えますか？","現金不可の店も多い"],
+[511,"travel","영수증 주세요","ヨンスジュン ジュセヨ","レシートください","免税手続きに必要"],
+[512,"travel","면세 되나요?","ミョンセ トェナヨ？","免税できますか？","一定額以上の買い物で"],
+[513,"travel","환불 가능해요?","ファンブル カヌンヘヨ？","返品できますか？","レシート必須"],
+[514,"travel","교환하고 싶어요","キョファナゴ シポヨ","交換したいです","サイズ違いなど"],
+[515,"travel","봉투 필요하세요?","ポントゥ ピリョハセヨ？","袋は必要ですか？","コンビニでよく聞かれる"],
+[516,"travel","아니요, 괜찮아요","アニヨ、ケンチャナヨ","いいえ、大丈夫です","断る時の定番"],
+[517,"travel","포장해 주세요","ポジャンヘ ジュセヨ","包んでください","プレゼント用にも"],
+[518,"travel","사진 좀 찍어 주실래요?","サジン チョム チゴ ジュシルレヨ？","写真を撮っていただけますか？","観光地で頼む時"],
+[519,"travel","여기가 어디예요?","ヨギガ オディエヨ？","ここはどこですか？","道に迷った時"],
+[520,"travel","명동역이 어디예요?","ミョンドンヨギ オディエヨ？","明洞駅はどこですか？","駅名を入れ替えて使える"],
+[521,"travel","직진하세요","チクチナセヨ","まっすぐ行ってください","道案内でよく聞く"],
+[522,"travel","오른쪽 / 왼쪽","オルンチョク／ウェンチョク","右／左","方向の基本"],
+[523,"travel","몇 번 출구로 나가면 돼요?","ミョッポン チュルグロ ナガミョン トェヨ？","何番出口から出ればいいですか？","地下鉄の出口は多い"],
+[524,"travel","환승하려면 어떻게 해요?","ファンスンハリョミョン オットケ ヘヨ？","乗り換えはどうすればいいですか？","路線の乗り継ぎ"],
+[525,"travel","이 버스 시청 가요?","イ ボス シチョン カヨ？","このバスは市庁に行きますか？","行き先の確認"],
+[526,"travel","다음 역에서 내려요","タウム ヨゲソ ネリョヨ","次の駅で降ります","混雑時に伝える"],
+[527,"travel","여기서 내려주세요","ヨギソ ネリョジュセヨ","ここで降ろしてください","タクシーで"],
+[528,"travel","여기로 가주세요","ヨギロ カジュセヨ","ここに行ってください","地図を見せながら"],
+[529,"travel","얼마나 걸려요?","オルマナ コルリョヨ？","どのくらいかかりますか？","所要時間の確認"],
+[530,"travel","택시 불러주세요","テクシ プルロジュセヨ","タクシーを呼んでください","ホテルのフロントで"],
+[531,"travel","공항버스 어디서 타요?","コンハンボス オディソ タヨ？","空港バスはどこで乗りますか？","到着直後に使う"],
+[532,"travel","표 한 장 주세요","ピョ ハンジャン ジュセヨ","切符を1枚ください","장＝枚"],
+[533,"travel","티머니 카드 충전해 주세요","ティモニ カドゥ チュンジョネ ジュセヨ","T-moneyをチャージしてください","コンビニでできる"],
+[534,"travel","체크인 하고 싶어요","チェクイン ハゴ シポヨ","チェックインしたいです","ホテル到着時"],
+[535,"travel","짐 좀 맡길 수 있어요?","チム チョム マッキル ス イッソヨ？","荷物を預けられますか？","チェックイン前後に"],
+[536,"travel","방 좀 바꿀 수 있어요?","パン チョム パクル ス イッソヨ？","部屋を変えられますか？","問題があった時"],
+[537,"travel","수건 더 주세요","スゴン ト ジュセヨ","タオルをもっとください","客室の備品追加"],
+[538,"travel","에어컨이 안 돼요","エオコニ アン トェヨ","エアコンが動きません","故障を伝える"],
+[539,"travel","와이파이 비밀번호가 뭐예요?","ワイパイ ピミルボノガ ムォエヨ？","Wi-Fiのパスワードは何ですか？","カフェやホテルで"],
+[540,"travel","예약 취소하고 싶어요","イェヤク チュソハゴ シポヨ","予約をキャンセルしたいです","変更が出た時"],
+[541,"travel","입구가 어디예요?","イプグガ オディエヨ？","入口はどこですか？","建物を探す時"],
+[542,"travel","몇 시까지 해요?","ミョッシッカジ ヘヨ？","何時までやっていますか？","営業時間の確認"],
+[543,"travel","줄 서야 해요?","チュル ソヤ ヘヨ？","並ばないといけませんか？","人気店で"],
+
+// ---------- ビジネス・職場 ----------
+[601,"biz","안녕하십니까","アンニョンハシムニッカ","こんにちは（最上級の丁寧）","式典や取引先への挨拶"],
+[602,"biz","명함 한 장 드리겠습니다","ミョンハム ハンジャン トゥリゲッスムニダ","名刺を1枚お渡しします","初対面の挨拶と一緒に"],
+[603,"biz","수고 많으십니다","スゴ マヌシムニダ","お疲れ様です","仕事中の相手への声かけ"],
+[604,"biz","담당자분 계신가요?","タムダンジャブン ケシンガヨ？","ご担当者はいらっしゃいますか？","電話や訪問で"],
+[605,"biz","통화 괜찮으세요?","トンファ ケンチャヌセヨ？","お電話大丈夫ですか？","電話の冒頭で"],
+[606,"biz","회의 중입니다","フェイ ジュンイムニダ","会議中です","取り次げない理由"],
+[607,"biz","자료 보내드렸습니다","チャリョ ポネドゥリョッスムニダ","資料をお送りしました","送付連絡"],
+[608,"biz","첨부 파일 확인 부탁드립니다","チョンブ パイル ファギン プタクトゥリムニダ","添付ファイルをご確認ください","メールの定型"],
+[609,"biz","확인했습니다","ファギネッスムニダ","確認いたしました","受領の返事"],
+[610,"biz","검토해 보겠습니다","コムトヘ ボゲッスムニダ","検討いたします","即答を避ける時"],
+[611,"biz","확인 후 연락드리겠습니다","ファギン フ ヨルラクトゥリゲッスムニダ","確認後にご連絡します","保留の伝え方"],
+[612,"biz","일정 조정 가능할까요?","イルチョン チョジョン カヌンハルカヨ？","日程調整は可能でしょうか？","会議の再設定"],
+[613,"biz","회의는 몇 시부터인가요?","フェイヌン ミョッシプトインガヨ？","会議は何時からですか？","予定の確認"],
+[614,"biz","조금 늦을 것 같습니다","チョグム ヌジュル ゴッ カッスムニダ","少し遅れそうです","丁寧な遅刻連絡"],
+[615,"biz","내일까지 부탁드립니다","ネイルカジ プタクトゥリムニダ","明日までにお願いします","期限を示す"],
+[616,"biz","수정 부탁드립니다","スジョン プタクトゥリムニダ","修正をお願いします","書類の手直し依頼"],
+[617,"biz","납기는 언제인가요?","ナプキヌン オンジェインガヨ？","納期はいつですか？","製造・取引の会話"],
+[618,"biz","견적서 부탁드립니다","キョンジョクソ プタクトゥリムニダ","見積書をお願いします","購買のやりとり"],
+[619,"biz","계약서를 검토하겠습니다","ケヤクソルル コムトハゲッスムニダ","契約書を検討します","法務確認の前に"],
+[620,"biz","불량률이 높습니다","プルリャンニュリ ノプスムニダ","不良率が高いです","品質会議で使う表現"],
+[621,"biz","원인을 분석하고 있습니다","ウォニヌル プンソカゴ イッスムニダ","原因を分析しています","調査中の報告"],
+[622,"biz","재발 방지 대책이 필요합니다","チェバル パンジ テチェギ ピリョハムニダ","再発防止策が必要です","是正処置の話"],
+[623,"biz","데이터 공유해 주세요","テイト コンユヘ ジュセヨ","データを共有してください","依頼の定番"],
+[624,"biz","문제가 생겼습니다","ムンジェガ センギョッスムニダ","問題が発生しました","トラブル報告"],
+[625,"biz","대응 방안을 검토 중입니다","テウン パンアヌル コムト ジュンイムニダ","対応方針を検討中です","進捗の説明"],
+[626,"biz","출장 가겠습니다","チュルチャン カゲッスムニダ","出張に行きます","予定の共有"],
+[627,"biz","도움 주셔서 감사합니다","トウム ジュショソ カムサハムニダ","ご協力ありがとうございます","お礼のメール"],
+[628,"biz","죄송하지만 다시 한 번 말씀해 주시겠어요?","チェソンハジマン タシ ハンボン マルッスメ ジュシゲッソヨ？","恐れ入りますが、もう一度お願いできますか？","丁寧な聞き返し"],
+[629,"biz","먼저 퇴근하겠습니다","モンジョ トェグナゲッスムニダ","お先に失礼します","退社時の挨拶"],
+[630,"biz","내일 뵙겠습니다","ネイル ペプケッスムニダ","また明日お会いしましょう","別れの挨拶"],
+[631,"biz","앞으로도 잘 부탁드립니다","アプロド チャル プタクトゥリムニダ","今後ともよろしくお願いします","メールの結び"],
+[632,"biz","제 소개를 드리겠습니다","チェ ソゲルル トゥリゲッスムニダ","自己紹介いたします","プレゼンの導入"],
+// ---------- 気持ち・リアクション ----------
+[701,"emotion","좋아요","チョアヨ","いいですね","好意・賛成の万能語"],
+[702,"emotion","싫어요","シロヨ","嫌です","はっきり断る"],
+[703,"emotion","기뻐요","キッポヨ","うれしいです","喜びの基本"],
+[704,"emotion","슬퍼요","スルポヨ","悲しいです","感情表現の基本"],
+[705,"emotion","화났어요","ファナッソヨ","怒っています","화나다＝腹が立つ"],
+[706,"emotion","놀랐어요","ノルラッソヨ","驚きました","びっくりした時"],
+[707,"emotion","무서워요","ムソウォヨ","怖いです","ホラーや高所で"],
+[708,"emotion","부끄러워요","プックロウォヨ","恥ずかしいです","照れた時"],
+[709,"emotion","심심해","シムシメ","ひまだ","独り言でよく出る"],
+[710,"emotion","신난다","シンナンダ","わくわくする","テンションが上がった時"],
+[711,"emotion","행복해","ヘンボケ","幸せ","満たされた気持ち"],
+[712,"emotion","속상해","ソクサンヘ","やるせない・胸が痛む","悲しみと悔しさが混ざった感情"],
+[713,"emotion","서운해","ソウネ","ちょっと寂しい・物足りない","相手の態度に対して使う微妙な感情"],
+[714,"emotion","감동했어요","カムドンヘッソヨ","感動しました","心が動いた時"],
+[715,"emotion","다행이다","タヘンイダ","よかった","安心した時の一言"],
+[716,"emotion","부럽다","プロプタ","うらやましい","素直な感想"],
+[717,"emotion","아깝다","アッカプタ","もったいない","惜しい時に"],
+[718,"emotion","힘들어","ヒムドゥロ","しんどい","体も心も両方に使う"],
+[719,"emotion","지쳤어","チチョッソ","疲れ果てた","힘들어より重い"],
+[720,"emotion","답답해","タプタペ","もどかしい・息が詰まる","状況がうまく進まない時"],
+[721,"emotion","설레","ソルレ","ドキドキする","恋や期待でときめく"],
+[722,"emotion","그래요?","クレヨ？","そうなんですか？","相槌の基本"],
+[723,"emotion","그렇군요","クロクンニョ","なるほど","理解を示す"],
+[724,"emotion","아, 그렇구나","ア、クロクナ","あ、そうなんだ","タメ口の相槌"],
+[725,"emotion","물론이죠","ムルロニジョ","もちろんです","快諾"],
+[726,"emotion","당연하죠","タンヨナジョ","当然です","強い肯定"],
+[727,"emotion","글쎄요","クルッセヨ","そうですねえ…","判断を保留する便利な一言"],
+[728,"emotion","아마도","アマド","たぶん","確信がない時"],
+[729,"emotion","진정해","チンジョンヘ","落ち着いて","慌てている人に"],
+[730,"emotion","잘했어","チャレッソ","よくやったね","褒める言葉"],
+[731,"emotion","대단해","テダネ","すごいね","尊敬をこめて"],
+[732,"emotion","멋있어","モシッソ","かっこいい","人にも行動にも"],
+[733,"emotion","힘내","ヒムネ","元気出して","励ましの定番"],
+[734,"emotion","걱정하지 마","コクチョンハジ マ","心配しないで","安心させる"],
+[735,"emotion","잘 될 거야","チャル トェル コヤ","うまくいくよ","前向きな励まし"],
+[736,"emotion","고생했어","コセンヘッソ","お疲れさま","労をねぎらう"],
+[737,"emotion","축하해","チュカヘ","おめでとう","タメ口"],
+[738,"emotion","보고 싶었어","ポゴ シポッソ","会いたかった","友達にも使える"],
+[739,"emotion","고마워 진심으로","コマウォ チンシムロ","心からありがとう","改まって伝える時"],
+[740,"emotion","미치겠다","ミチゲッタ","たまらない・やばい","良い意味でも悪い意味でも"],
+
+// ---------- 体調・トラブル ----------
+[801,"trouble","아파요","アパヨ","痛いです／具合が悪いです","体調不良の基本"],
+[802,"trouble","머리가 아파요","モリガ アパヨ","頭が痛いです","部位を入れ替えて使える"],
+[803,"trouble","배가 아파요","ペガ アパヨ","お腹が痛いです","食べ過ぎや不調に"],
+[804,"trouble","열이 나요","ヨリ ナヨ","熱があります","発熱を伝える"],
+[805,"trouble","감기에 걸렸어요","カムギエ コルリョッソヨ","風邪をひきました","定型表現"],
+[806,"trouble","약국이 어디예요?","ヤックギ オディエヨ？","薬局はどこですか？","まず薬局に行く人が多い"],
+[807,"trouble","감기약 주세요","カムギヤク ジュセヨ","風邪薬をください","薬局で"],
+[808,"trouble","병원에 가고 싶어요","ピョンウォネ カゴ シポヨ","病院に行きたいです","症状が重い時"],
+[809,"trouble","구급차 불러주세요","クグプチャ プルロジュセヨ","救急車を呼んでください","緊急時。119番"],
+[810,"trouble","경찰 불러주세요","キョンチャル プルロジュセヨ","警察を呼んでください","緊急時。112番"],
+[811,"trouble","지갑을 잃어버렸어요","チガブル イロボリョッソヨ","財布をなくしました","紛失を伝える"],
+[812,"trouble","여권을 잃어버렸어요","ヨックォヌル イロボリョッソヨ","パスポートをなくしました","領事館に連絡が必要"],
+[813,"trouble","핸드폰을 도둑맞았어요","ヘンドゥポヌル トドゥンマジャッソヨ","携帯を盗まれました","被害を伝える"],
+[814,"trouble","길을 잃었어요","キルル イロッソヨ","道に迷いました","助けを求める時"],
+[815,"trouble","일본어 하는 사람 있어요?","イルボノ ハヌン サラム イッソヨ？","日本語を話せる人はいますか？","困った時の切り札"],
+[816,"trouble","영어 할 수 있어요?","ヨンオ ハル ス イッソヨ？","英語を話せますか？","意思疎通が難しい時"],
+[817,"trouble","통역 좀 부탁해요","トンヨク チョム プタケヨ","通訳をお願いします","込み入った手続きで"],
+[818,"trouble","알레르기가 있어요","アルレルギガ イッソヨ","アレルギーがあります","注文前に必ず"],
+[819,"trouble","매운 거 못 먹어요","メウン ゴ モン モゴヨ","辛いものが食べられません","はっきり伝えたい時"],
+[820,"trouble","여기 사인하면 돼요?","ヨギ サイナミョン トェヨ？","ここにサインすればいいですか？","書類手続きで"],
+[821,"trouble","보험 처리 가능해요?","ポホム チョリ カヌンヘヨ？","保険は使えますか？","病院の受付で"],
+[822,"trouble","화장실 좀 쓸 수 있어요?","ファジャンシル チョム スル ス イッソヨ？","トイレを使えますか？","店に頼む時"],
+[823,"trouble","충전기 좀 빌릴 수 있을까요?","チュンジョンギ チョム ピルリル ス イッスルカヨ？","充電器を借りられますか？","カフェやホテルで"],
+[824,"trouble","와이파이가 안 돼요","ワイパイガ アン トェヨ","Wi-Fiがつながりません","不具合を伝える"],
+[825,"trouble","조심하세요","チョシマセヨ","気をつけてください","注意を促す"],
+[826,"trouble","비켜주세요","ピキョジュセヨ","どいてください","急いでいる時。강めの表現"],
+[827,"trouble","괜찮으세요?","ケンチャヌセヨ？","大丈夫ですか？","相手を心配する時"],
+[828,"trouble","천천히 하세요","チョンチョニ ハセヨ","ゆっくりどうぞ","相手を急かさない一言"],
+[829,"trouble","여기 아파요","ヨギ アパヨ","ここが痛いです","指しながら伝える"],
+[830,"trouble","약은 언제 먹어요?","ヤグン オンジェ モゴヨ？","薬はいつ飲みますか？","服用方法の確認"],
+
+// ---------- 基本単語 ----------
+[901,"word","하나, 둘, 셋","ハナ、トゥル、セッ","1、2、3（固有数詞）","個数や年齢を数える時"],
+[902,"word","넷, 다섯, 여섯","ネッ、タソッ、ヨソッ","4、5、6（固有数詞）","人数や個数に"],
+[903,"word","일곱, 여덟, 아홉, 열","イルゴプ、ヨドル、アホプ、ヨル","7、8、9、10（固有数詞）","10まで覚えると買い物が楽"],
+[904,"word","일, 이, 삼, 사, 오","イル、イ、サム、サ、オ","1、2、3、4、5（漢数詞）","値段・日付・電話番号に"],
+[905,"word","육, 칠, 팔, 구, 십","ユク、チル、パル、ク、シプ","6、7、8、9、10（漢数詞）","漢字語の数え方"],
+[906,"word","백, 천, 만","ペク、チョン、マン","百、千、万","1만 원＝1万ウォン"],
+[907,"word","오늘","オヌル","今日","時を表す基本語"],
+[908,"word","내일","ネイル","明日","予定の話に"],
+[909,"word","어제","オジェ","昨日","過去の話に"],
+[910,"word","모레","モレ","明後日","ややかたまった表現"],
+[911,"word","아침","アチム","朝・朝食","食事名も兼ねる"],
+[912,"word","점심","チョムシム","昼・昼食","점심 먹었어？＝昼食べた？"],
+[913,"word","저녁","チョニョク","夕方・夕食","夜ごはんの意味でも使う"],
+[914,"word","밤","パム","夜","밤에＝夜に"],
+[915,"word","지금","チグム","今","今すぐの意味でも"],
+[916,"word","나중에","ナジュンエ","あとで","先延ばしの一言にも"],
+[917,"word","월요일","ウォリョイル","月曜日","週の始まり"],
+[918,"word","화요일","ファヨイル","火曜日","曜日は漢字由来"],
+[919,"word","수요일","スヨイル","水曜日","水＝수"],
+[920,"word","목요일","モギョイル","木曜日","木＝목"],
+[921,"word","금요일","クミョイル","金曜日","金＝금"],
+[922,"word","토요일","トヨイル","土曜日","土＝토"],
+[923,"word","일요일","イリョイル","日曜日","日＝일"],
+[924,"word","주말","チュマル","週末","주말에 뭐 해？＝週末何する？"],
+[925,"word","봄, 여름, 가을, 겨울","ポム、ヨルム、カウル、キョウル","春、夏、秋、冬","季節の四つ"],
+[926,"word","더워요","トウォヨ","暑いです","夏の会話で頻出"],
+[927,"word","추워요","チュウォヨ","寒いです","冬のソウルは本当に寒い"],
+[928,"word","비 와요","ピ ワヨ","雨が降っています","天気の伝え方"],
+[929,"word","눈 와요","ヌン ワヨ","雪が降っています","눈＝雪・目の同音異義"],
+[930,"word","엄마, 아빠","オンマ、アッパ","お母さん、お父さん","くだけた呼び方"],
+[931,"word","형 / 오빠","ヒョン／オッパ","お兄さん","男性は형、女性は오빠と呼ぶ"],
+[932,"word","누나 / 언니","ヌナ／オンニ","お姉さん","男性は누나、女性は언니と呼ぶ"],
+[933,"word","동생","トンセン","弟・妹","年下の兄弟をまとめて言う"],
+[934,"word","친구","チング","友達","同い年の相手を指すことが多い"],
+[935,"word","선생님","ソンセンニム","先生","目上への敬称にも使う"],
+[936,"word","사람","サラム","人","일본 사람＝日本人"],
+[937,"word","돈","トン","お金","돈이 없어＝お金がない"],
+[938,"word","시간","シガン","時間","시간 있어？＝時間ある？"],
+[939,"word","여기, 저기, 거기","ヨギ、チョギ、コギ","ここ、あそこ、そこ","場所の指示語"],
+[940,"word","이거, 저거, 그거","イゴ、チョゴ、クゴ","これ、あれ、それ","物の指示語"],
+[941,"word","많이","マニ","たくさん","많이 드세요＝たくさん食べて"],
+[942,"word","조금","チョグム","少し","조금만＝少しだけ"],
+[943,"word","빨리","パルリ","早く","빨리빨리は韓国の代表的な口癖"],
+[944,"word","천천히","チョンチョニ","ゆっくり","急がせない時に"],
+[945,"word","진짜","チンチャ","本当に","強調にも疑問にも使える"],
+[946,"word","너무","ノム","とても・~すぎる","너무 좋아＝すごく good"],
+[947,"word","제일","チェイル","一番","가장も同じ意味"],
+[948,"word","같이","カッチ","一緒に","같이 가자＝一緒に行こう"],
+[949,"word","혼자","ホンジャ","ひとりで","혼밥＝ひとり飯"],
+[950,"word","오늘 날씨 어때요?","オヌル ナルッシ オッテヨ？","今日の天気はどうですか？","会話の切り出しに便利"],
+
+// ---------- 追加：挨拶・基本 ----------
+[56,"daily","잘 먹었어","チャル モゴッソ","ごちそうさま","タメ口。食べ終わりに","ごちそうさま"],
+[57,"daily","다음에 봐요","タウメ ボァヨ","また会いましょう","やわらかい別れの挨拶","またあいましょう"],
+[58,"daily","조심히 가세요","チョシミ カセヨ","気をつけてお帰りください","見送る時の定番","きをつけておかえりください"],
+[59,"daily","저기요","チョギヨ","すみません","知らない人に声をかける時","すみません"],
+[60,"daily","혹시…","ホクシ…","もしかして…","控えめに尋ねる切り出し","もしかして…"],
+[61,"daily","잠깐만","チャムッカンマン","ちょっと待って","タメ口","ちょっとまって"],
+[62,"daily","이해했어요","イヘヘッソヨ","理解しました","説明を受けた後に","りかいしました"],
+[63,"daily","좋은 주말 보내세요","チョウン チュマル ポネセヨ","よい週末を","金曜の挨拶","よいしゅうまつを"],
+[64,"daily","새해 복 많이 받으세요","セヘ ポク マニ パドゥセヨ","明けましておめでとうございます","年末年始の定番","あけましておめでとうございます"],
+[65,"daily","맛있겠다","マシッケッタ","おいしそう","料理を見た瞬間に","おいしそう"],
+[66,"daily","어서 오세요","オソ オセヨ","いらっしゃいませ","店に入ると必ず言われる","いらっしゃいませ"],
+[67,"daily","또 오세요","ット オセヨ","またお越しください","店を出る時に言われる","またおこしください"],
+[68,"daily","여보세요","ヨボセヨ","もしもし","電話に出る時","もしもし"],
+[69,"daily","누구세요?","ヌグセヨ？","どなたですか？","相手を確かめる","どなたですか？"],
+[70,"daily","잠시 후에 다시 걸게요","チャムシ フエ タシ コルケヨ","少ししたらかけ直します","電話を切る時","すこししたらかけなおします"],
+
+// ---------- 追加：友達・タメ口 ----------
+[151,"friend","오늘 뭐 할 거야?","オヌル ムォ ハル コヤ？","今日何するの？","予定を聞く","きょうなにするの？"],
+[152,"friend","같이 갈래?","カッチ カルレ？","一緒に行く？","気軽な誘い","いっしょにいく？"],
+[153,"friend","나도 갈래","ナド カルレ","私も行く","参加表明","わたしもいく"],
+[154,"friend","다음에 같이 가자","タウメ カッチ カジャ","今度一緒に行こう","次の約束につなげる","こんどいっしょにいこう"],
+[155,"friend","진짜 재밌었어","チンチャ チェミッソッソ","すごく楽しかった","遊んだ後の感想","すごくたのしかった"],
+[156,"friend","신경 쓰지 마","シンギョン ッスジ マ","気にしないで","相手を気遣う","きにしないで"],
+[157,"friend","내가 할게","ネガ ハルケ","私がやるよ","引き受ける時","わたしがやるよ"],
+[158,"friend","도와줄까?","トワジュルッカ？","手伝おうか？","申し出る一言","てつだおうか？"],
+[159,"friend","고마워 진짜","コマウォ チンチャ","本当にありがとう","語順を変えた強調","ほんとうにありがとう"],
+[160,"friend","미안, 깜빡했어","ミアン、カムパケッソ","ごめん、うっかり忘れた","忘れ物・約束忘れに","ごめん、うっかりわすれた"],
+
+// ---------- 追加：食事・カフェ ----------
+[443,"food","뭐 드실래요?","ムォ トゥシルレヨ？","何にしますか？","注文を促される時","なににしますか？"],
+[444,"food","저는 이걸로 할게요","チョヌン イゴルロ ハルケヨ","私はこれにします","メニューを指しながら","わたしはこれにします"],
+[445,"food","같은 거 주세요","カットゥン ゴ ジュセヨ","同じものをください","連れと同じ注文","おなじものをください"],
+[446,"food","이거 하나 더 주세요","イゴ ハナ ト ジュセヨ","これをもう一つください","追加注文","これをもうひとつください"],
+[447,"food","조금만 주세요","チョグムマン ジュセヨ","少しだけください","量の調整","すこしだけください"],
+[448,"food","안 매워요?","アン メウォヨ？","辛くないですか？","念のための確認","からくないですか？"],
+[449,"food","이건 뭐예요?","イゴン ムォエヨ？","これは何ですか？","知らない料理に","これはなんですか？"],
+[450,"food","맛이 어때요?","マシ オッテヨ？","味はどうですか？","相手に感想を聞く","あじはどうですか？"],
+[451,"food","입에 맞아요?","イベ マジャヨ？","お口に合いますか？","もてなす側の一言","おくちにあいますか？"],
+[452,"food","조금 짜요","チョグム ッチャヨ","少ししょっぱいです","味の感想","すこししょっぱいです"],
+[453,"food","싱거워요","シンゴウォヨ","味が薄いです","塩気が足りない時","あじがうすいです"],
+[454,"food","다 먹었어요","タ モゴッソヨ","全部食べました","完食の報告","ぜんぶたべました"],
+[455,"food","남겨도 돼요?","ナムギョド トェヨ？","残してもいいですか？","食べきれない時","のこしてもいいですか？"],
+
+// ---------- 生活・毎日 ----------
+[1001,"life","일어났어?","イロナッソ？","起きた？","朝の連絡","おきた？"],
+[1002,"life","이제 일어났어","イジェ イロナッソ","今起きたよ","寝起きの返事","いまおきたよ"],
+[1003,"life","아직 자고 있었어","アジク チャゴ イッソッソ","まだ寝てた","起こされた時","まだねてた"],
+[1004,"life","늦잠 잤어","ヌッチャム ジャッソ","寝坊した","遅刻の理由","ねぼうした"],
+[1005,"life","피곤해 죽겠다","ピゴネ チュッケッタ","疲れて死にそう","一日の終わりに","つかれてしにそう"],
+[1006,"life","배고파","ペゴパ","お腹すいた","食事前の定番","おなかすいた"],
+[1007,"life","배불러","ペブルロ","お腹いっぱい","食後のタメ口","おなかいっぱい"],
+[1008,"life","목말라","モンマルラ","のどが渇いた","飲み物が欲しい時","のどがかわいた"],
+[1009,"life","졸려","チョルリョ","眠い","夜や昼下がりに","ねむい"],
+[1010,"life","샤워하고 올게","シャウォハゴ オルケ","シャワー浴びてくる","家族や恋人に","シャワーあびてくる"],
+[1011,"life","이제 씻어야지","イジェ シッソヤジ","そろそろお風呂に入らないと","씻다は洗う・入浴する","そろそろおふろにはいらないと"],
+[1012,"life","청소해야 해","チョンソヘヤ ヘ","掃除しなきゃ","家事の会話","そうじしなきゃ"],
+[1013,"life","빨래 돌렸어","パルレ トルリョッソ","洗濯機を回した","돌리다＝回す","せんたくきをまわした"],
+[1014,"life","설거지 할게","ソルゴジ ハルケ","皿洗いするね","家事の分担","さらあらいするね"],
+[1015,"life","쓰레기 버려줘","ッスレギ ポリョジョ","ゴミ捨ててきて","家庭でよく使う","ゴミすててきて"],
+[1016,"life","장 보러 가자","チャン ボロ カジャ","買い物に行こう","食材の買い出し","かいものにいこう"],
+[1017,"life","뭐 사야 해?","ムォ サヤ ヘ？","何を買えばいい？","買い物リストの確認","なにをかえばいい？"],
+[1018,"life","집에 아무것도 없어","チベ アムゴット オプソ","家に何もないよ","冷蔵庫が空の時","いえになにもないよ"],
+[1019,"life","배달 시킬까?","ペダル シキルッカ？","デリバリー取ろうか？","韓国は配達文化が強い","デリバリーとろうか？"],
+[1020,"life","오늘 뭐 먹지?","オヌル ムォ モクチ？","今日何食べよう？","毎日の悩み","きょうなにたべよう？"],
+[1021,"life","냉장고에 있어","ネンジャンゴエ イッソ","冷蔵庫にあるよ","場所を教える","れいぞうこにあるよ"],
+[1022,"life","불 좀 켜줘","プル チョム キョジョ","電気つけて","켜다＝つける","でんきつけて"],
+[1023,"life","불 꺼줘","プル ッコジョ","電気消して","끄다＝消す","でんきけして"],
+[1024,"life","문 닫아줘","ムン タダジョ","ドア閉めて","닫다＝閉める","ドアしめて"],
+[1025,"life","에어컨 켜도 돼?","エオコン キョド トェ？","エアコンつけてもいい？","許可を求める","エアコンつけてもいい？"],
+[1026,"life","창문 열까?","チャンムン ヨルッカ？","窓開けようか？","열다＝開ける","まどあけようか？"],
+[1027,"life","핸드폰 어디 있어?","ヘンドゥポン オディ イッソ？","携帯どこにある？","探し物の定番","けいたいどこにある？"],
+[1028,"life","충전 좀 해야 해","チュンジョン チョム ヘヤ ヘ","充電しないと","バッテリー切れ寸前に","じゅうでんしないと"],
+[1029,"life","리모컨 좀 줘","リモコン チョム ジョ","リモコン取って","家でのお願い","リモコンとって"],
+[1030,"life","텔레비전 보자","テルレビジョン ポジャ","テレビ見よう","TV・티비とも言う","テレビみよう"],
+[1031,"life","나 나갔다 올게","ナ ナガッタ オルケ","ちょっと出かけてくる","家を出る時","ちょっとでかけてくる"],
+[1032,"life","금방 올게","クムバン オルケ","すぐ戻るね","短時間の外出","すぐもどるね"],
+[1033,"life","늦게 들어갈 것 같아","ヌッケ トゥロガル ゴッ カッタ","帰りが遅くなりそう","家族への連絡","かえりがおそくなりそう"],
+[1034,"life","오늘 집에 있을래","オヌル チベ イッスルレ","今日は家にいる","誘いを断る時にも","きょうはいえにいる"],
+[1035,"life","날씨 좋네","ナルッシ チョンネ","いい天気だね","雑談の切り出し","いいてんきだね"],
+[1036,"life","미세먼지 심하다","ミセモンジ シムハダ","PM2.5がひどい","韓国の日常的な話題","ピーエムにてんごがひどい"],
+[1037,"life","우산 챙겨","ウサン チェンギョ","傘持っていって","챙기다＝用意する","かさもっていって"],
+[1038,"life","옷 따뜻하게 입어","オッ ッタットゥッタゲ イボ","暖かい服を着て","冬の気遣い","あたたかいふくをきて"],
+[1039,"life","감기 조심해","カムギ チョシメ","風邪に気をつけて","季節の変わり目に","かぜにきをつけて"],
+[1040,"life","푹 쉬어","プク シュィオ","ゆっくり休んで","疲れている相手に","ゆっくりやすんで"],
+
+// ---------- 雑談・つなぎ言葉 ----------
+[1101,"talk","그래서?","クレソ？","それで？","話の続きを促す","それで？"],
+[1102,"talk","그랬구나","クレックナ","そうだったんだ","納得の相槌","そうだったんだ"],
+[1103,"talk","어떻게 됐어?","オットケ トェッソ？","どうなった？","結果を尋ねる","どうなった？"],
+[1104,"talk","무슨 일이야?","ムスン イリヤ？","どうしたの？","事情を聞く","どうしたの？"],
+[1105,"talk","왜 그래?","ウェ クレ？","どうしたの？","様子が変な時","どうしたの？"],
+[1106,"talk","별일 없어","ピョリル オプソ","特に何もないよ","近況を聞かれた返事","とくになにもないよ"],
+[1107,"talk","그냥 그래","クニャン クレ","まあまあだよ","可もなく不可もなく","まあまあだよ"],
+[1108,"talk","요즘 어때?","ヨジュム オッテ？","最近どう？","会話の入り口","さいきんどう？"],
+[1109,"talk","바빴어?","パッパッソ？","忙しかった？","久しぶりの相手に","いそがしかった？"],
+[1110,"talk","시간 진짜 빠르다","シガン チンチャ パルダ","時間が経つの早いね","年末や再会時に","じかんがたつのはやいね"],
+[1111,"talk","맞다!","マッタ！","あ、そうだ！","思い出した時","あ、そうだ！"],
+[1112,"talk","아 맞아","ア マジャ","あ、そうだった","相手の指摘に気づく","あ、そうだった"],
+[1113,"talk","근데","クンデ","ところで／でも","話題を変えるつなぎ","ところで／でも"],
+[1114,"talk","그러니까","クロニッカ","だからさ","理由を強調する","だからさ"],
+[1115,"talk","사실은","サシルン","実は","打ち明ける前置き","じつは"],
+[1116,"talk","어떻게 생각해?","オットケ センガケ？","どう思う？","意見を求める","どうおもう？"],
+[1117,"talk","내 생각에는","ネ センガゲヌン","私の考えでは","意見を述べる前置き","わたしのかんがえでは"],
+[1118,"talk","나도 그래","ナド クレ","私もそう","共感","わたしもそう"],
+[1119,"talk","나는 좀 달라","ナヌン チョム タルラ","私は少し違う","やわらかい反対","わたしはすこしちがう"],
+[1120,"talk","그럴 줄 알았어","クロル チュル アラッソ","そうなると思った","予想通りの時","そうなるとおもった"],
+[1121,"talk","잘 모르겠는데","チャル モルゲンヌンデ","よくわからないけど","断定を避ける","よくわからないけど"],
+[1122,"talk","한번 생각해 볼게","ハンボン センガッケ ボルケ","ちょっと考えてみる","保留の返事","ちょっとかんがえてみる"],
+[1123,"talk","다음에 얘기하자","タウメ イェギハジャ","また今度話そう","話を切り上げる","またこんどはなそう"],
+[1124,"talk","말도 안 돼","マルド アン トェ","ありえない","驚きや否定","ありえない"],
+[1125,"talk","설마","ソルマ","まさか","信じられない時","まさか"],
+[1126,"talk","그럴 리가 없어","クロル リガ オプソ","そんなはずない","強い否定","そんなはずない"],
+[1127,"talk","어쩔 수 없었어","オッチョル ス オプソッソ","仕方なかった","事情を説明する","しかたなかった"],
+[1128,"talk","아무튼","アムトゥン","とにかく","話をまとめる","とにかく"],
+[1129,"talk","예를 들면","イェルル トゥルミョン","例えば","説明を補う","たとえば"],
+[1130,"talk","다시 말하면","タシ マラミョン","言い換えると","言い直す時","いいかえると"],
+[1131,"talk","솔직히 말해서","ソルチキ マレソ","正直に言うと","本音を言う前置き","しょうじきにいうと"],
+[1132,"talk","농담이야","ノンダミヤ","冗談だよ","誤解を解く","じょうだんだよ"],
+[1133,"talk","진심이야","チンシミヤ","本気だよ","真剣さを伝える","ほんきだよ"],
+[1134,"talk","그런 것 같아","クロン ゴッ カッタ","そうみたい","断定しない言い方","そうみたい"],
+[1135,"talk","잘 됐네","チャル トェンネ","よかったね","相手の好報に","よかったね"],
+
+// ---------- 約束・電話・連絡 ----------
+[1201,"plan","언제 만날까?","オンジェ マンナルッカ？","いつ会う？","約束の切り出し","いつあう？"],
+[1202,"plan","몇 시에 만날까?","ミョッシエ マンナルッカ？","何時に会う？","時間を決める","なんじにあう？"],
+[1203,"plan","어디서 만날까?","オディソ マンナルッカ？","どこで会う？","場所を決める","どこであう？"],
+[1204,"plan","시간 괜찮아?","シガン ケンチャナ？","時間大丈夫？","相手の都合を聞く","じかんだいじょうぶ？"],
+[1205,"plan","나는 아무 때나 좋아","ナヌン アム ッテナ チョア","私はいつでもいいよ","相手に合わせる","わたしはいつでもいいよ"],
+[1206,"plan","그때 봐","クッテ ボァ","その時に会おう","約束成立の一言","そのときにあおう"],
+[1207,"plan","약속 잊지 마","ヤクソク イッチ マ","約束忘れないで","念押し","やくそくわすれないで"],
+[1208,"plan","미리 연락 줘","ミリ ヨルラク ジョ","前もって連絡して","直前変更を防ぐ","まえもってれんらくして"],
+[1209,"plan","약속 좀 미뤄도 돼?","ヤクソク チョム ミルォド トェ？","約束をずらしてもいい？","日程変更のお願い","やくそくをずらしてもいい？"],
+[1210,"plan","다음으로 미루자","タウムロ ミルジャ","次に延ばそう","延期の提案","つぎにのばそう"],
+[1211,"plan","갑자기 일이 생겼어","カプチャギ イリ センギョッソ","急に用事ができた","キャンセルの理由","きゅうにようじができた"],
+[1212,"plan","오늘은 못 갈 것 같아","オヌルン モッ カル ゴッ カッタ","今日は行けそうにない","やわらかい欠席連絡","きょうはいけそうにない"],
+[1213,"plan","조금만 기다려","チョグムマン キダリョ","少しだけ待って","遅れそうな時","すこしだけまって"],
+[1214,"plan","거의 다 왔어","コイ タ ワッソ","もうすぐ着く","到着直前の連絡","もうすぐつく"],
+[1215,"plan","먼저 들어가 있어","モンジョ トゥロガ イッソ","先に入ってて","店の前で待たせない","さきにはいってて"],
+[1216,"plan","전화 좀 해줘","チョナ チョム ヘジョ","電話して","文字より早い時","でんわして"],
+[1217,"plan","지금 통화 가능해?","チグム トンファ カヌンヘ？","今電話できる？","かける前の確認","いまでんわできる？"],
+[1218,"plan","나중에 전화할게","ナジュンエ チョナハルケ","あとで電話する","今は話せない時","あとででんわする"],
+[1219,"plan","문자로 보내줄게","ムンチャロ ポネジュルケ","メッセージで送るね","住所や情報を送る","メッセージでおくるね"],
+[1220,"plan","위치 보내줘","ウィチ ポネジョ","位置を送って","地図を共有してもらう","いちをおくって"],
+[1221,"plan","몇 번 출구에서 봐","ミョッポン チュルグエソ ボァ","何番出口で会おう","地下鉄の待ち合わせ","なんばんでぐちであおう"],
+[1222,"plan","다 왔으면 연락해","タ ワッスミョン ヨルラッケ","着いたら連絡して","合流の確認","ついたられんらくして"],
+[1223,"plan","오늘 고마웠어","オヌル コマウォッソ","今日はありがとう","別れた後のメッセージ","きょうはありがとう"],
+[1224,"plan","다음엔 내가 살게","タウメン ネガ サルケ","次は私がおごるね","おごってもらった後に","つぎはわたしがおごるね"],
+[1225,"plan","잘 도착했어?","チャル トチャッケッソ？","ちゃんと着いた？","相手を気遣う連絡","ちゃんとついた？"]
+];
+
+const YOMI = {
+  6:"ほんとうにありがとうございます", 7:"もうしわけありません", 10:"だいじょうぶです／けっこうです", 11:"だいじょうぶだよ",
+  15:"ちがいます／とんでもないです", 16:"おつかれさまでした", 17:"おつかれさまです", 20:"よろしくおねがいします",
+  22:"おあいできてうれしいです", 23:"おひさしぶりです", 24:"おげんきでしたか？", 25:"げんきにしてる？",
+  26:"おかげさまでげんきです", 27:"おなまえはなんですか？", 28:"おなまえをうかがえますか？", 29:"わたしはにほんじんです",
+  30:"かんこくごがすこしはなせます", 31:"かんこくごはうまくはなせません", 32:"ゆっくりはなしてください", 33:"もういちどいってください",
+  34:"どういういみですか？", 38:"すこしおまちください", 41:"しつれいします", 42:"おねがいがあります",
+  43:"たすけてください", 44:"よいいちにちを", 47:"いいゆめみてね", 48:"いってきます",
+  50:"おたんじょうびおめでとう", 54:"なんさいですか？", 55:"どこにすんでいますか？", 101:"なにしてる？",
+  102:"ごはんたべた？", 103:"いまどこ？", 104:"いまむかってる", 105:"すこしおくれそう",
+  107:"ほんとう？", 110:"ちょう／めっちゃ", 111:"ほんとうにイライラする", 112:"ムカつく（わらい）",
+  113:"ちょうおもしろい", 116:"ようキャ・にんきもの", 117:"いんキャ・ぼっち", 121:"しらない",
+  124:"わらいすぎてしぬ", 125:"おなかがちぎれるほどわらえる", 126:"あそぼう！", 127:"いつあいてる？",
+  128:"きょうちょっとつかれてる", 130:"へんしんしてよ", 131:"きどくスルーしないで", 132:"おんしんふつうだったの？",
+  133:"なんでもいいよ", 134:"すきにして", 135:"ほんきで？", 136:"めっちゃすき",
+  137:"ちょううま", 138:"スッキリするてんかい", 139:"もどかしいてんかい", 140:"ひさしぶり！",
+  142:"またこんどあおう", 144:"さきにかえるね", 145:"しゃしんおくって", 147:"めっちゃこのみのタイプ",
+  150:"てきとうにやろう", 201:"おし（いちばんすきなひと）", 202:"にばんめのおし", 203:"オタかつ・おしかつ",
+  204:"ぬまおち・ファンになること", 206:"せいこうしたオタク", 207:"とつぜんのぬまおち", 208:"ファンサインかい",
+  209:"おしだけをおったどうが", 211:"ストリーミングさいせい", 212:"ひたすらたえてまつ", 213:"くるったようにれんだする",
+  214:"カムバック（しんきょくはつばい）", 216:"じつぶつがはんそくきゅうにきれい", 217:"むねキュン", 218:"はなみちだけあるこうね",
+  219:"うたがほんとうによいです", 220:"きょうのステージさいこうでした", 223:"にほんからきました", 224:"かんこくごをべんきょうしています",
+  226:"いっしょにしゃしんとってもいいですか？", 227:"ゆびハートしてください", 228:"からだにきをつけてください", 229:"むりしないでください",
+  230:"きょうもおつかれさまでした", 231:"ずっとおうえんします", 232:"チケットとれました", 233:"せきがほんとうにいいです",
+  234:"グッズがかいたいです", 235:"めがあいました", 236:"ステージえいぞうみた？", 237:"アルバムよやくした",
+  238:"コンサートいきたい", 239:"こんかいのコンセプトさいこう", 240:"ダンスがほんとうにじょうずだね", 301:"あいたい",
+  302:"あいしてる", 304:"おにいさん／おねえさん", 305:"ひとめぼれしたんだ", 306:"つきあわない？",
+  307:"わたしのことすき？", 308:"わたしのほうがもっとすき", 309:"きょうすごくかわいいね", 310:"きょうかっこいいね",
+  311:"てつないでもいい？", 312:"だきしめて", 314:"えいがみにいかない？", 315:"おくっていくよ",
+  316:"きをつけてきてね", 317:"きをつけてかえってね", 318:"ついたられんらくして", 319:"でんわするね",
+  320:"こえがききたかった", 321:"すごくあいたかった", 322:"きみしかいないよ", 323:"いっしょういっしょにいよう",
+  324:"わたしのゆめみてね", 325:"ごはんちゃんとたべてね", 326:"たいちょうくずさないでね", 327:"しっとしちゃう",
+  328:"すねてるの？", 329:"おこってる？", 330:"ごめん、わたしがわるかった", 331:"なかなおりしよう",
+  332:"きょうどんないちにちだった？", 333:"ゆっくりねてね", 335:"ふたりでしゃしんとろう", 336:"あいしてるっていって",
+  402:"なんめいさまですか？", 403:"ふたりです", 404:"せきありますか？", 405:"よやくしています",
+  407:"ちゅうもんします", 408:"おすすめをおしえてください", 409:"いちばんにんきはなんですか？", 410:"これをににんまえください",
+  411:"これからいですか？", 412:"からくないものはありますか？", 413:"からさをひかえめにしてください", 414:"パクチーぬいてください",
+  418:"こおりすくなめにしてください", 419:"シロップぬいてください", 420:"ショットついかしてください", 421:"もちかえりにします",
+  422:"てんないでたべます", 423:"おみずください", 424:"おかずをもうすこしください", 425:"とりざらください",
+  427:"しょうちゅういっぽんください", 428:"ビールにはいください", 429:"もういっぱいください", 430:"かんぱい！",
+  431:"かんぱい！", 432:"おいしくめしあがってください", 435:"おなかいっぱいです", 436:"のこりをつつんでください",
+  437:"おかいけいおねがいします", 438:"べつべつにはらいます", 439:"わたしがおごります", 440:"カードではらいます",
+  502:"たかいです", 503:"すこしやすくしてください", 504:"これしちゃくしてもいいですか？", 505:"ほかのいろもありますか？",
+  506:"もっとおおきいサイズありますか？", 507:"しんぴんをください", 508:"みているだけです", 509:"これみせてください",
+  510:"カードつかえますか？", 512:"めんぜいできますか？", 513:"へんぴんできますか？", 514:"こうかんしたいです",
+  515:"ふくろはひつようですか？", 516:"いいえ、だいじょうぶです", 517:"つつんでください", 518:"しゃしんをとっていただけますか？",
+  520:"ミョンドンえきはどこですか？", 521:"まっすぐいってください", 522:"みぎ／ひだり", 523:"なんばんでぐちからでればいいですか？",
+  524:"のりかえはどうすればいいですか？", 525:"このバスはしちょうにいきますか？", 526:"つぎのえきでおります", 527:"ここでおろしてください",
+  528:"ここにいってください", 530:"タクシーをよんでください", 531:"くうこうバスはどこでのりますか？", 532:"きっぷをいちまいください",
+  535:"にもつをあずけられますか？", 536:"へやをかえられますか？", 538:"エアコンがうごきません", 539:"ワイファイのパスワードはなんですか？",
+  540:"よやくをキャンセルしたいです", 541:"いりぐちはどこですか？", 542:"なんじまでやっていますか？", 543:"ならばないといけませんか？",
+  601:"こんにちは（さいじょうきゅうのていねい）", 602:"めいしをいちまいおわたしします", 603:"おつかれさまです", 604:"ごたんとうしゃはいらっしゃいますか？",
+  605:"おでんわだいじょうぶですか？", 606:"かいぎちゅうです", 607:"しりょうをおおくりしました", 608:"てんぷファイルをごかくにんください",
+  609:"かくにんいたしました", 610:"けんとういたします", 611:"かくにんごにごれんらくします", 612:"にっていちょうせいはかのうでしょうか？",
+  613:"かいぎはなんじからですか？", 614:"すこしおくれそうです", 615:"あすまでにおねがいします", 616:"しゅうせいをおねがいします",
+  617:"のうきはいつですか？", 618:"みつもりしょをおねがいします", 619:"けいやくしょをけんとうします", 620:"ふりょうりつがたかいです",
+  621:"げんいんをぶんせきしています", 622:"さいはつぼうしさくがひつようです", 623:"データをきょうゆうしてください", 624:"もんだいがはっせいしました",
+  625:"たいおうほうしんをけんとうちゅうです", 626:"しゅっちょうにいきます", 627:"ごきょうりょくありがとうございます", 628:"おそれいりますが、もういちどおねがいできますか？",
+  629:"おさきにしつれいします", 630:"またあすおあいしましょう", 631:"こんごともよろしくおねがいします", 632:"じこしょうかいいたします",
+  702:"いやです", 704:"かなしいです", 705:"おこっています", 706:"おどろきました",
+  707:"こわいです", 708:"はずかしいです", 711:"しあわせ", 712:"やるせない・むねがいたむ",
+  713:"ちょっとさびしい・ものたりない", 714:"かんどうしました", 719:"つかれはてた", 720:"もどかしい・いきがつまる",
+  726:"とうぜんです", 729:"おちついて", 733:"げんきだして", 734:"しんぱいしないで",
+  736:"おつかれさま", 738:"あいたかった", 739:"こころからありがとう", 801:"いたいです／ぐあいがわるいです",
+  802:"あたまがいたいです", 803:"おなかがいたいです", 804:"ねつがあります", 805:"かぜをひきました",
+  806:"やっきょくはどこですか？", 807:"かぜぐすりをください", 808:"びょういんにいきたいです", 809:"きゅうきゅうしゃをよんでください",
+  810:"けいさつをよんでください", 811:"さいふをなくしました", 813:"けいたいをぬすまれました", 814:"みちにまよいました",
+  815:"にほんごをはなせるひとはいますか？", 816:"えいごをはなせますか？", 817:"つうやくをおねがいします", 819:"からいものがたべられません",
+  821:"ほけんはつかえますか？", 822:"トイレをつかえますか？", 823:"じゅうでんきをかりられますか？", 825:"きをつけてください",
+  827:"だいじょうぶですか？", 829:"ここがいたいです", 830:"くすりはいつのみますか？", 901:"ひとつ、ふたつ、みっつ（こゆうすうし）",
+  902:"よっつ、いつつ、むっつ（こゆうすうし）", 903:"ななつ、やっつ、ここのつ、とお（こゆうすうし）", 904:"いち、に、さん、し、ご（かんすうし）", 905:"ろく、なな、はち、きゅう、じゅう（かんすうし）",
+  906:"ひゃく、せん、まん", 907:"きょう", 908:"あした", 909:"きのう",
+  910:"あさって", 911:"あさ・ちょうしょく", 912:"ひる・ちゅうしょく", 913:"ゆうがた・ゆうしょく",
+  914:"よる", 915:"いま", 917:"げつようび", 918:"かようび",
+  919:"すいようび", 920:"もくようび", 921:"きんようび", 922:"どようび",
+  923:"にちようび", 924:"しゅうまつ", 925:"はる、なつ、あき、ふゆ", 926:"あついです",
+  927:"さむいです", 928:"あめがふっています", 929:"ゆきがふっています", 930:"おかあさん、おとうさん",
+  931:"おにいさん", 932:"おねえさん", 933:"おとうと・いもうと", 934:"ともだち",
+  935:"せんせい", 936:"ひと", 937:"おかね", 938:"じかん",
+  942:"すこし", 943:"はやく", 945:"ほんとうに", 947:"いちばん",
+  948:"いっしょに", 950:"きょうのてんきはどうですか？",
+};
+const KTIP = {
+  1:"낮 인사. 아침에는 おはよう, 밤에는 こんばんは", 2:"반말 인사. 만날 때도 헤어질 때도 씀", 3:"가장 정중한 감사 인사",
+  4:"감사합니다·고맙습니다 모두 이 한 문장으로 표현", 5:"반말. 친구나 아랫사람에게", 6:"本当に로 감사를 강조",
+  7:"가장 정중한 사과. 회사나 격식 있는 자리", 8:"일상적인 사과 표현", 9:"반말 사과",
+  10:"거절할 때도 結構です로 씀", 11:"반말", 12:"대답의 기본. うん은 반말",
+  13:"정중한 부정. 반말은 ううん", 14:"맞장구. そうですね도 자주 씀", 15:"부정과 겸손을 함께 나타냄",
+  16:"일이 끝났을 때의 인사. 반말은 お疲れ", 17:"아직 일하는 사람에게 건네는 인사", 18:"일본어는 가는 쪽·보내는 쪽 구분 없이 한 표현",
+  19:"18번과 같은 문장. 구분 없이 씀", 20:"첫인사와 부탁에 두루 쓰는 표현", 21:"첫 만남 인사. 이름 소개와 함께",
+  22:"자기소개에 덧붙이는 정중한 인사", 23:"오랜만에 만났을 때. 반말은 久しぶり", 24:"상대의 안부를 묻는 정중한 표현",
+  25:"반말. 친구에게", 26:"안부 질문에 대한 정중한 답", 27:"이름을 묻는 일반적인 표현",
+  28:"お名前보다 높은 존경 표현. 비즈니스에서", 29:"자기소개의 기본 문형", 30:"~が少し話せます로 능력을 표현",
+  31:"うまく＋부정으로 겸손하게", 32:"ゆっくり＝천천히. ~てください는 부탁", 33:"알아듣지 못했을 때 다시 묻는 표현",
+  34:"뜻을 물을 때 쓰는 정형 표현", 35:"이해·승낙. 반말은 わかった", 36:"반말",
+  37:"모를 때. 반말은 わからない", 38:"잠깐 기다려 달라고 정중히 부탁", 39:"감사에 대한 답. いえいえ도 많이 씀",
+  40:"겸손하게 사양할 때", 41:"방에 들어가거나 자리를 뜰 때", 42:"부탁을 꺼낼 때의 앞말",
+  43:"도움을 청할 때. 위급한 상황에도", 44:"헤어질 때 덧붙이는 인사", 45:"밤 인사의 정중한 형태",
+  46:"반말", 47:"자기 전에 건네는 다정한 한마디", 48:"집을 나설 때. 남는 쪽은 いってらっしゃい",
+  49:"귀가했을 때. 맞이하는 쪽은 おかえり", 50:"생일 축하. 반말은 誕生日おめでとう", 51:"합격·결혼 등 모든 축하에",
+  52:"응원. 정중하게는 頑張ってください", 53:"식사 후 인사. 먹기 전에는 いただきます", 54:"나이를 묻는 표현. おいくつですか가 더 정중",
+  55:"사는 곳을 묻는 표현", 56:"반말. 친한 사이에서", 57:"다음 만남을 기대하는 인사",
+  58:"배웅할 때 쓰는 정중한 인사", 59:"모르는 사람을 부를 때. あのう도 자주 씀", 60:"조심스럽게 물어볼 때의 앞말",
+  61:"반말. 정중하게는 少し待ってください", 62:"설명을 듣고 이해했을 때", 63:"금요일에 주고받는 인사",
+  64:"새해 인사. 12월에는 良いお年を", 65:"음식을 보고 감탄할 때", 66:"가게에 들어가면 듣게 되는 말",
+  67:"가게를 나올 때 듣게 되는 말", 68:"전화를 받을 때의 첫마디", 69:"상대를 확인할 때. どちら様ですか가 더 정중",
+  70:"전화를 끊으며 하는 말", 101:"반말 질문. 何してるの？도 같은 뜻", 102:"일본에서는 인사말이 아니라 실제 질문",
+  103:"今どこにいる？의 줄임말", 104:"向かう＝향해 가다", 105:"~そう＝~것 같다",
+  106:"まじ＝진짜. 젊은층 반말", 107:"놀랐을 때. 정중하게는 本当ですか", 108:"좋을 때도 나쁠 때도 쓰는 감탄",
+  109:"놀라서 말이 막힐 때 내는 소리", 110:"강조 표현. めっちゃ는 간사이 유래", 111:"イライラ＝짜증이 나는 모습",
+  112:"웃으며 가볍게 화낼 때", 113:"超＝아주(젊은층 표현)", 114:"재미없을 때. つまらない와 같은 뜻",
+  115:"감탄과 황당함 모두 나타냄", 116:"陽キャ＝외향적이고 인기 있는 사람", 117:"陰キャ＝내향적인 사람. ぼっち는 혼자",
+  118:"강한 맞장구", 119:"강한 공감. それな도 젊은층 표현", 120:"동의를 구하는 반말",
+  121:"반말. 정중하게는 知りません", 122:"めんどくさい＝귀찮다", 123:"당황했을 때 나오는 한마디",
+  124:"웃음이 터졌을 때의 과장 표현", 125:"배가 아플 만큼 웃긴다는 뜻", 126:"놀자고 권할 때",
+  127:"상대의 일정을 물을 때", 128:"완곡한 거절로도 쓰임", 129:"일본은 LINE이 많아 LINEして라고도 함",
+  130:"返信＝답장", 131:"既読スルー＝읽고 답하지 않기", 132:"音信不通＝연락이 끊긴 상태",
+  133:"메뉴를 고를 때 자주 나오는 말", 134:"차갑게 들릴 수 있으니 주의", 135:"진심인지 확인할 때",
+  136:"반말. めっちゃ로 강조", 137:"超うま＝아주 맛있다(젊은층)", 138:"속이 시원해지는 전개",
+  139:"답답하게 이어지는 전개", 140:"반말. 정중하게는 お久しぶりです", 141:"가벼운 작별 인사",
+  142:"사교적인 인사로도 쓰임", 143:"반말 작별 인사", 144:"모임에서 먼저 나올 때",
+  145:"사진을 보내 달라고 부탁할 때", 146:"별로일 때의 솔직한 감상", 147:"취향에 맞을 때. 사람·물건 모두",
+  148:"어쩔 수 없다고 받아들일 때", 149:"상대를 위로할 때", 150:"적당히 하자는 제안",
+  151:"하루 일정을 묻는 반말", 152:"가볍게 권하는 표현", 153:"참여 의사를 밝힐 때",
+  154:"다음 약속으로 이어가는 말", 155:"함께 놀고 난 뒤의 감상", 156:"상대의 부담을 덜어 주는 말",
+  157:"일을 맡겠다고 나설 때", 158:"도움을 제안할 때", 159:"感謝를 강조한 어순",
+  160:"うっかり＝무심코, 깜빡", 201:"推し＝최애. 推しメン이라고도 함", 202:"두 번째 최애. 二推し라고도 함",
+  203:"オタ活＝덕질. オタク＋活動", 204:"沼落ち＝늪에 빠지다, 입덕", 205:"팬 활동을 그만두는 것",
+  206:"팬 활동이 잘 풀린 사람", 207:"갑자기 입덕하는 것", 208:"ファンサイン会. 팬미팅은 ファンミ",
+  209:"한 멤버만 따라 찍은 영상", 210:"트레카. トレカ라고 줄여 부름", 211:"ストリーミング＝스트리밍",
+  212:"참고 기다리는 것", 213:"連打＝연타. 광클에 해당", 214:"일본에서는 新曲リリース라고도 함",
+  215:"공연장 필수 응원 도구", 216:"実物＝실물. 実物がすごい도 씀", 217:"胸キュン＝심쿵",
+  218:"花道＝꽃길. 일본 팬들도 쓰는 표현", 219:"감상을 전하는 기본 문형", 220:"공연 직후에 전하는 소감",
+  221:"オッパ는 일본어에 없어 그대로 씀", 222:"オンニ도 그대로 쓰는 팬 용어", 223:"팬 이벤트 자기소개에",
+  224:"대화를 여는 좋은 한마디", 225:"사인을 부탁할 때", 226:"사진 촬영 허락을 구할 때",
+  227:"指ハート＝손하트", 228:"건강을 챙기라는 인사", 229:"無理しない＝무리하지 않다",
+  230:"매일 보내기 좋은 응원 한마디", 231:"팬레터 마무리에", 232:"티켓팅 성공을 알릴 때",
+  233:"좌석을 자랑할 때", 234:"グッズ＝굿즈", 235:"目が合う＝눈이 마주치다",
+  236:"팬끼리 나누는 대화", 237:"발매 전에 오가는 이야기", 238:"~たい＝하고 싶다",
+  239:"コンセプト＝컨셉", 240:"칭찬하는 반말 표현", 301:"会いたい＝보고 싶다. 연인끼리 자주",
+  302:"가장 직접적인 사랑 표현", 303:"연인을 부르는 말. あなた도 씀", 304:"연상을 부르는 말. 일본에서는 이름＋さん이 일반적",
+  305:"一目惚れ＝첫눈에 반함", 306:"付き合う＝사귀다. 고백의 정형 표현", 307:"마음을 확인할 때",
+  308:"~のほうが＝~쪽이 더", 309:"칭찬. かわいい는 여성에게 많이 씀", 310:"かっこいい는 남성에게 많이 씀",
+  311:"手をつなぐ＝손을 잡다", 312:"抱きしめる＝껴안다", 313:"デート＝데이트",
+  314:"~ない？로 부드럽게 권유", 315:"送る＝배웅하다, 데려다주다", 316:"오는 사람에게 하는 당부",
+  317:"돌아가는 사람에게 하는 당부", 318:"着く＝도착하다", 319:"~ね는 약속의 어감",
+  320:"声＝목소리. 전화 첫마디에", 321:"보고 싶었다는 마음을 강조", 322:"~しかいない＝~밖에 없다",
+  323:"평생을 함께하자는 표현", 324:"잠들기 전 다정한 한마디", 325:"ちゃんと＝제대로, 잘",
+  326:"体調を崩す＝컨디션이 나빠지다", 327:"嫉妬＝질투", 328:"拗ねる＝토라지다",
+  329:"怒る＝화내다", 330:"솔직하게 사과할 때", 331:"仲直り＝화해",
+  332:"하루를 묻는 다정한 질문", 333:"ぐっすり寝て도 같은 뜻", 334:"고마움을 전하는 한마디",
+  335:"ふたり＝둘이서", 336:"사랑한다는 말을 졸라 볼 때", 401:"점원을 부를 때. お願いします도 씀",
+  402:"가게에서 듣는 질문", 403:"사람 수를 셀 때는 ひとり·ふたり", 404:"입장할 때 확인하는 말",
+  405:"予約＝예약", 406:"メニュー를 부탁할 때", 407:"주문할 준비가 됐을 때",
+  408:"메뉴를 고르기 어려울 때", 409:"人気＝인기", 410:"~人前＝~인분",
+  411:"辛い＝맵다", 412:"매운 음식을 피할 때", 413:"辛さ＝매운 정도",
+  414:"パクチー＝고수", 415:"アイス＝차가운 음료", 416:"ホット＝따뜻한 음료",
+  417:"サイズアップ＝사이즈 크게", 418:"氷少なめ＝얼음 적게", 419:"シロップ＝시럽",
+  420:"ショット追加＝샷 추가", 421:"持ち帰り＝포장. テイクアウト도 씀", 422:"店内＝가게 안에서 먹기",
+  423:"일본은 물이 무료로 나옴", 424:"おかず＝반찬. 일본은 리필이 드묾", 425:"取り皿＝앞접시",
+  426:"おしぼり＝물수건", 427:"焼酎＝소주. 一本＝한 병", 428:"~杯＝~잔",
+  429:"추가 주문할 때", 430:"잔을 부딪치며 하는 건배", 431:"430번과 같은 표현",
+  432:"음식을 권할 때", 433:"먹기 전 인사. 반말도 같은 형태", 434:"먹은 직후의 감상",
+  435:"더 못 먹을 때", 436:"残り＝남은 것", 437:"계산을 부탁할 때",
+  438:"別々に＝따로따로", 439:"おごる＝내가 사다", 440:"カード＝카드",
+  441:"가게나 역에서 꼭 필요한 표현", 442:"おかわり＝리필", 443:"점원이 주문을 받을 때",
+  444:"메뉴를 가리키면서", 445:"같이 온 사람과 같은 주문", 446:"もう一つ＝하나 더",
+  447:"양을 줄여 달라고 할 때", 448:"먹기 전 확인", 449:"처음 보는 음식에 대해",
+  450:"상대의 감상을 물을 때", 451:"음식을 대접하는 쪽이 하는 말", 452:"しょっぱい＝짜다",
+  453:"味が薄い＝싱겁다", 454:"다 먹었을 때", 455:"다 먹지 못할 때",
+  501:"가격을 물을 때", 502:"高い＝비싸다", 503:"安くする＝싸게 하다. 일본은 흥정이 드묾",
+  504:"試着＝시착", 505:"色＝색", 506:"사이즈 교환을 물을 때. 小さい도 같은 문형",
+  507:"新品＝새 상품", 508:"점원에게 부담 없이 하는 말", 509:"물건을 보여 달라고 할 때",
+  510:"カードが使えますか도 같은 뜻", 511:"領収書는 영수증(증빙), レシート는 계산 영수증", 512:"免税＝면세",
+  513:"返品＝반품", 514:"交換＝교환", 515:"편의점에서 자주 듣는 질문",
+  516:"정중하게 사양하는 답", 517:"包む＝포장하다", 518:"사진을 부탁할 때의 정중한 표현",
+  519:"길을 잃었을 때", 520:"역 이름을 바꿔 넣어 쓸 수 있음", 521:"まっすぐ＝곧장",
+  522:"방향을 나타내는 기본 단어", 523:"出口＝출구", 524:"乗り換え＝환승",
+  525:"버스 행선지를 확인할 때", 526:"降りる＝내리다", 527:"택시에서 내릴 때",
+  528:"주소나 지도를 보여 주며", 529:"所要시간을 물을 때", 530:"호텔 프런트에서",
+  531:"空港バス＝공항버스", 532:"~枚＝~장", 533:"일본은 Suica·PASMO를 씀",
+  534:"チェックイン＝체크인", 535:"預ける＝맡기다", 536:"방에 문제가 있을 때",
+  537:"タオル＝수건", 538:"고장을 알릴 때", 539:"パスワード＝비밀번호",
+  540:"キャンセル＝취소", 541:"入口＝입구", 542:"영업시간을 물을 때",
+  543:"並ぶ＝줄을 서다", 601:"가장 정중한 인사. 식전·거래처에", 602:"名刺＝명함. 一枚＝한 장",
+  603:"직장에서 인사말처럼 씀", 604:"担当者＝담당자", 605:"전화를 시작할 때의 배려",
+  606:"전화를 대신 받을 때", 607:"資料＝자료. お送りする는 겸양어", 608:"添付ファイル＝첨부 파일",
+  609:"확인했다는 답. 겸양 표현", 610:"検討＝검토. 즉답을 피할 때", 611:"보류하고 나중에 답할 때",
+  612:"日程調整＝일정 조정", 613:"회의 시간을 확인할 때", 614:"정중한 지각 연락",
+  615:"明日まで＝내일까지", 616:"修正＝수정", 617:"納期＝납기",
+  618:"見積書＝견적서", 619:"契約書＝계약서", 620:"不良率＝불량률. 품질 회의에서",
+  621:"原因を分析する＝원인을 분석하다", 622:"再発防止策＝재발 방지 대책", 623:"共有する＝공유하다",
+  624:"문제 발생을 보고할 때", 625:"対応方針＝대응 방침", 626:"出張＝출장",
+  627:"협력에 대한 감사", 628:"정중하게 되묻는 표현", 629:"퇴근할 때의 인사",
+  630:"헤어질 때의 정중한 인사", 631:"메일 맺음말로 자주 씀", 632:"발표를 시작할 때",
+  701:"好き와 いい 모두 이 표현으로 통함", 702:"嫌＝싫음", 703:"嬉しい＝기쁘다",
+  704:"悲しい＝슬프다", 705:"怒る＝화내다", 706:"驚く＝놀라다",
+  707:"怖い＝무섭다", 708:"恥ずかしい＝부끄럽다", 709:"暇＝한가함. 반말 표현",
+  710:"わくわく＝설레고 들뜬 느낌", 711:"幸せ＝행복", 712:"やるせない＝착잡하고 씁쓸하다",
+  713:"寂しい＝섭섭하고 서운하다", 714:"感動＝감동", 715:"안심했을 때 나오는 말",
+  716:"うらやましい＝부럽다", 717:"もったいない＝아깝다", 718:"힘든 상태를 나타내는 반말",
+  719:"疲れ果てる＝기진맥진하다", 720:"もどかしい＝답답하다", 721:"ドキドキ＝가슴이 두근거림",
+  722:"가벼운 맞장구", 723:"なるほど＝그렇군요", 724:"반말 맞장구",
+  725:"흔쾌히 받아들일 때", 726:"当然＝당연", 727:"판단을 미룰 때 쓰는 편리한 말",
+  728:"たぶん＝아마", 729:"落ち着く＝침착하다", 730:"칭찬하는 반말",
+  731:"すごい＝대단하다", 732:"사람이나 행동을 칭찬할 때", 733:"元気を出す＝기운을 내다",
+  734:"心配＝걱정", 735:"긍정적인 격려", 736:"お疲れ의 반말 표현",
+  737:"반말 축하", 738:"친구에게도 쓸 수 있음", 739:"마음을 담아 전할 때",
+  740:"たまらない는 좋을 때도 나쁠 때도", 801:"痛い＝아프다", 802:"頭＝머리. 부위만 바꿔 쓸 수 있음",
+  803:"お腹＝배", 804:"熱が出る＝열이 나다", 805:"風邪をひく＝감기에 걸리다",
+  806:"薬局＝약국. ドラッグストア도 많음", 807:"風邪薬＝감기약", 808:"病院＝병원",
+  809:"일본의 구급 신고는 119", 810:"일본의 경찰 신고는 110", 811:"財布＝지갑",
+  812:"잃어버렸을 때. 領事館에 연락 필요", 813:"盗まれる＝도둑맞다", 814:"道に迷う＝길을 잃다",
+  815:"도움이 필요할 때의 핵심 문장", 816:"英語＝영어", 817:"通訳＝통역",
+  818:"アレルギー＝알레르기", 819:"매운 음식을 못 먹을 때", 820:"サイン＝서명",
+  821:"保険＝보험", 822:"가게에 화장실을 부탁할 때", 823:"充電器＝충전기",
+  824:"고장이나 불편을 알릴 때", 825:"주의를 줄 때", 826:"비켜 달라고 할 때. 강하게 들림",
+  827:"상대를 걱정할 때", 828:"재촉하지 않는 배려의 말", 829:"아픈 곳을 가리키며",
+  830:"약 복용법을 물을 때", 901:"ひとつ·ふたつ는 물건을 셀 때", 902:"よっつ·いつつ·むっつ",
+  903:"ななつ·やっつ·ここのつ·とお", 904:"가격·날짜에는 いち·に·さん", 905:"ろく·なな(しち)·はち·きゅう·じゅう",
+  906:"百·千·万 단위", 907:"今日＝오늘", 908:"明日＝내일. あす라고도 읽음",
+  909:"昨日＝어제", 910:"明後日＝모레", 911:"朝＝아침. 아침 식사도 朝ごはん",
+  912:"昼＝점심", 913:"夕方·夜ごはん으로도 씀", 914:"夜＝밤",
+  915:"今＝지금", 916:"後で＝나중에", 917:"月曜日＝월요일",
+  918:"火曜日＝화요일", 919:"水曜日＝수요일", 920:"木曜日＝목요일",
+  921:"金曜日＝금요일", 922:"土曜日＝토요일", 923:"日曜日＝일요일",
+  924:"週末＝주말", 925:"春·夏·秋·冬", 926:"暑い＝덥다",
+  927:"寒い＝춥다", 928:"雨が降る＝비가 오다", 929:"雪が降る＝눈이 오다",
+  930:"엄마·아빠의 편한 호칭", 931:"형·오빠를 구분하지 않고 お兄さん", 932:"누나·언니를 구분하지 않고 お姉さん",
+  933:"弟＝남동생, 妹＝여동생", 934:"友達＝친구", 935:"先生＝선생님. 존칭으로도 씀",
+  936:"人＝사람", 937:"お金＝돈", 938:"時間＝시간",
+  939:"ここ·あそこ·そこ", 940:"これ·あれ·それ", 941:"たくさん＝많이",
+  942:"少し＝조금", 943:"早く＝빨리", 944:"ゆっくり＝천천히",
+  945:"本当に＝정말로", 946:"とても＝매우. ~すぎる도 씀", 947:"一番＝제일",
+  948:"一緒に＝함께", 949:"一人で＝혼자서", 950:"날씨로 대화를 시작할 때",
+  1001:"起きる＝일어나다", 1002:"기상 직후의 대답", 1003:"寝る＝자다",
+  1004:"寝坊＝늦잠", 1005:"피로를 과장해서 말할 때", 1006:"お腹がすく＝배가 고프다",
+  1007:"お腹いっぱい＝배가 부르다", 1008:"のどが渇く＝목이 마르다", 1009:"眠い＝졸리다",
+  1010:"シャワーを浴びる＝샤워하다", 1011:"お風呂に入る＝목욕하다", 1012:"掃除＝청소",
+  1013:"洗濯機を回す＝세탁기를 돌리다", 1014:"皿洗い＝설거지", 1015:"ゴミを捨てる＝쓰레기를 버리다",
+  1016:"買い物に行く＝장을 보러 가다", 1017:"무엇이 필요한지 확인할 때", 1018:"먹을 것이 없을 때",
+  1019:"デリバリー＝배달", 1020:"매일 하는 고민", 1021:"冷蔵庫＝냉장고",
+  1022:"電気をつける＝불을 켜다", 1023:"電気を消す＝불을 끄다", 1024:"閉める＝닫다",
+  1025:"허락을 구하는 ~てもいい？", 1026:"開ける＝열다", 1027:"물건을 찾을 때",
+  1028:"充電＝충전", 1029:"リモコン＝리모컨", 1030:"テレビ＝텔레비전",
+  1031:"잠깐 외출할 때", 1032:"すぐ＝금방", 1033:"귀가가 늦어질 때의 연락",
+  1034:"외출하지 않겠다고 할 때", 1035:"날씨 인사로 좋은 한마디", 1036:"PM2.5는 일본에서도 화제",
+  1037:"傘＝우산", 1038:"추운 날의 배려", 1039:"風邪＝감기",
+  1040:"ゆっくり休む＝푹 쉬다", 1101:"이야기를 재촉하는 반말", 1102:"납득했을 때의 맞장구",
+  1103:"결과를 물을 때", 1104:"사정을 물을 때", 1105:"상대가 이상해 보일 때",
+  1106:"안부 질문에 대한 답", 1107:"그저 그렇다는 대답", 1108:"근황을 묻는 반말",
+  1109:"오랜만에 만난 상대에게", 1110:"시간이 빠르다고 느낄 때", 1111:"생각이 났을 때",
+  1112:"지적을 받고 깨달았을 때", 1113:"화제를 바꾸는 말. ところで는 격식체", 1114:"이유를 강조할 때",
+  1115:"속마음을 꺼내는 앞말", 1116:"의견을 물을 때", 1117:"의견을 말하기 전의 앞말",
+  1118:"공감을 나타낼 때", 1119:"부드럽게 반대할 때", 1120:"예상대로였을 때",
+  1121:"단정을 피하는 말", 1122:"보류하는 대답", 1123:"이야기를 마무리할 때",
+  1124:"믿기지 않을 때", 1125:"설마 하는 놀람", 1126:"강하게 부정할 때",
+  1127:"사정을 설명할 때", 1128:"이야기를 정리하는 말", 1129:"예를 들 때",
+  1130:"다시 설명할 때", 1131:"본심을 말하기 전에", 1132:"오해를 풀 때",
+  1133:"진지함을 전할 때", 1134:"단정하지 않는 표현", 1135:"상대의 좋은 소식에",
+  1201:"약속을 꺼낼 때", 1202:"시간을 정할 때", 1203:"장소를 정할 때",
+  1204:"상대의 사정을 물을 때", 1205:"상대에게 맞출 때", 1206:"약속이 정해진 뒤의 한마디",
+  1207:"忘れないで＝잊지 말아 줘", 1208:"前もって＝미리", 1209:"일정을 미뤄 달라고 할 때",
+  1210:"延期를 제안할 때", 1211:"急に＝갑자기", 1212:"완곡하게 불참을 알릴 때",
+  1213:"조금만 기다려 달라고 할 때", 1214:"もうすぐ＝곧", 1215:"먼저 들어가 있으라고 할 때",
+  1216:"전화를 부탁할 때", 1217:"전화하기 전에 확인", 1218:"나중에 전화하겠다고 할 때",
+  1219:"メッセージ＝메시지", 1220:"位置＝위치. 地図도 자주 씀", 1221:"出口＝출구. 지하철 약속에",
+  1222:"합류를 확인할 때", 1223:"헤어진 뒤 보내는 인사", 1224:"다음에 사겠다고 할 때",
+  1225:"무사히 도착했는지 묻는 연락",
+};
+
+/* ==========================================================
+   1. データ整形
+   ========================================================== */
+const DATA = RAW.map(r => ({
+  id:r[0], cat:r[1], ko:r[2], kana:r[3], ja:r[4], tip:r[5],
+  yomi: r[6] || YOMI[r[0]] || r[4],
+  tipKo: KTIP[r[0]] || ""
+}));
+
+/* ==========================================================
+   2. かな → ハングル表記（韓国語話者が日本語の音を読むための補助）
+   ========================================================== */
+const KANA = {
+  "あ":"아","い":"이","う":"우","え":"에","お":"오",
+  "か":"카","き":"키","く":"쿠","け":"케","こ":"코",
+  "が":"가","ぎ":"기","ぐ":"구","げ":"게","ご":"고",
+  "さ":"사","し":"시","す":"스","せ":"세","そ":"소",
+  "ざ":"자","じ":"지","ず":"즈","ぜ":"제","ぞ":"조",
+  "た":"타","ち":"치","つ":"쓰","て":"테","と":"토",
+  "だ":"다","ぢ":"지","づ":"즈","で":"데","ど":"도",
+  "な":"나","に":"니","ぬ":"누","ね":"네","の":"노",
+  "は":"하","ひ":"히","ふ":"후","へ":"헤","ほ":"호",
+  "ば":"바","び":"비","ぶ":"부","べ":"베","ぼ":"보",
+  "ぱ":"파","ぴ":"피","ぷ":"푸","ぺ":"페","ぽ":"포",
+  "ま":"마","み":"미","む":"무","め":"메","も":"모",
+  "や":"야","ゆ":"유","よ":"요",
+  "ら":"라","り":"리","る":"루","れ":"레","ろ":"로",
+  "わ":"와","ゐ":"이","ゑ":"에","を":"오",
+  "ぁ":"아","ぃ":"이","ぅ":"우","ぇ":"에","ぉ":"오",
+  "ゃ":"야","ゅ":"유","ょ":"요","ゎ":"와","ゔ":"부"
+};
+const KANA_INIT = {"か":"가","き":"기","く":"구","け":"게","こ":"고","た":"다","ち":"지","て":"데","と":"도"};
+const DIG = {
+  "きゃ":["갸","캬"],"きゅ":["규","큐"],"きょ":["교","쿄"],
+  "ぎゃ":["갸","갸"],"ぎゅ":["규","규"],"ぎょ":["교","교"],
+  "しゃ":["샤","샤"],"しゅ":["슈","슈"],"しょ":["쇼","쇼"],
+  "じゃ":["자","자"],"じゅ":["주","주"],"じょ":["조","조"],
+  "ちゃ":["자","차"],"ちゅ":["주","추"],"ちょ":["조","초"],
+  "にゃ":["냐","냐"],"にゅ":["뉴","뉴"],"にょ":["뇨","뇨"],
+  "ひゃ":["햐","햐"],"ひゅ":["휴","휴"],"ひょ":["효","효"],
+  "びゃ":["뱌","뱌"],"びゅ":["뷰","뷰"],"びょ":["뵤","뵤"],
+  "ぴゃ":["퍄","퍄"],"ぴゅ":["퓨","퓨"],"ぴょ":["표","표"],
+  "みゃ":["먀","먀"],"みゅ":["뮤","뮤"],"みょ":["묘","묘"],
+  "りゃ":["랴","랴"],"りゅ":["류","류"],"りょ":["료","료"],
+  "ふぁ":["파","파"],"ふぃ":["피","피"],"ふぇ":["페","페"],"ふぉ":["포","포"],
+  "てぃ":["티","티"],"でぃ":["디","디"],"どぅ":["두","두"],
+  "うぃ":["위","위"],"うぇ":["웨","웨"],"しぇ":["셰","셰"],"じぇ":["제","제"],"ちぇ":["체","체"]
+};
+const JONG = {"ㄴ":4,"ㅁ":16,"ㅅ":19,"ㅇ":21};
+/* 助詞の「は」（＝わ と発音）の位置。値は文中で何番目の「は」かを表す */
+const HA = {1:1,27:1,29:1,31:1,409:1,412:1,441:1,444:1,449:1,450:1,515:1,519:1,520:1,
+  524:1,525:1,531:1,539:1,541:1,601:1,604:1,612:1,613:1,617:1,806:1,815:2,821:1,830:1,
+  950:1,1034:1,1115:1,1117:1,1119:1,1205:1,1212:1,1223:1,1224:1};
+function jungOf(str){
+  if(!str) return -1;
+  const code = str.charCodeAt(str.length - 1) - 0xac00;
+  if(code < 0 || code > 11171) return -1;
+  return Math.floor(code / 28) % 21;
+}
+function markParticle(yomi, id){
+  const n = HA[id];
+  if(!n) return yomi;
+  let seen = 0;
+  return yomi.replace(/は/g, m => (++seen === n ? "わ" : m));
+}
+
+function toHira(s){
+  return String(s).replace(/[\u30a1-\u30f6]/g, c => String.fromCharCode(c.charCodeAt(0) - 0x60));
+}
+function addJong(str, mark){
+  if(!str) return str;
+  const code = str.charCodeAt(str.length - 1) - 0xac00;
+  if(code < 0 || code > 11171 || code % 28 !== 0) return str;
+  return str.slice(0, -1) + String.fromCharCode(0xac00 + code + JONG[mark]);
+}
+function hangulize(text){
+  const s = toHira(text);
+  let out = "", initial = true;
+  for(let i = 0; i < s.length; i++){
+    const two = s.substr(i, 2);
+    if(DIG[two]){ out += DIG[two][initial ? 0 : 1]; initial = false; i++; continue; }
+    const c = s[i];
+    if(c === "ん"){
+      const nx = s[i+1] || "";
+      out = addJong(out, (nx && "まみむめもばびぶべぼぱぴぷぺぽ".indexOf(nx) >= 0) ? "ㅁ" : "ㄴ");
+      initial = false; continue;
+    }
+    if(c === "っ"){ out = addJong(out, "ㅅ"); initial = false; continue; }
+    if(c === "ー" || c === "〜"){ continue; }
+    if(KANA[c]){
+      if("あいうえお".indexOf(c) >= 0){
+        const pv = jungOf(out), mj = jungOf(KANA[c]);
+        /* 長音（おう・とう・おお など）はハングルでは書かない */
+        if(pv >= 0 && pv === mj) continue;
+        if(c === "う" && (pv === 8 || pv === 12 || pv === 13 || pv === 17)) continue;
+      }
+      out += (initial && KANA_INIT[c]) ? KANA_INIT[c] : KANA[c];
+      initial = false; continue;
+    }
+    out += c;
+    initial = true;
+  }
+  return out;
+}
+
+/* ==========================================================
+   3. 表示テキスト（学習者モード別）
+   ========================================================== */
+const T = {
+  ja: {
+    sub: n => n + "フレーズ・日本語で学ぶ韓国語",
+    learner: "学ぶ言語を選ぶ",
+    uiSubJa: "日本語で解説", uiSubKo: "한국어 안내",
+    dirLabel: "出題の向き",
+    dirA: "한국어 → 日本語", dirAs: "意味を思い出す",
+    dirB: "日本語 → 한국어", dirBs: "韓国語で言ってみる",
+    mList: "一覧で読む", mCard: "カードで暗記", mQuiz: "4択テスト",
+    search: "韓国語・カナ・日本語から探す",
+    mask: "答えを隠す", shuffle: "並べ替え", tip: "解説を表示",
+    reset: "記録を消す", tipOn: "解説を表示", tipOff: "解説を隠す", resetAsk: "「覚えた」と★の記録をすべて消します。よろしいですか？",
+    meter: (a,b) => "覚えた " + a + " / " + b,
+    count: (a,b) => "表示 " + a + "件　★" + b + "件",
+    footList: "★で自分用のリストを作れます",
+    footCard: "スペースで開く／← →で移動／1・2で採点",
+    footQuiz: "10問ごとに結果が出ます",
+    emptyT: "見つかりませんでした", emptyB: "キーワードを短くするか、カテゴリを「すべて」に戻してください。",
+    emptyQT: "問題を作れません", emptyQB: "4件以上そろうカテゴリを選んでください。",
+    hintT: "意味を思い出せたら開く", hintN: "韓国語で言えたら開く",
+    open: "答えを開く", again: "もう一度", know: "覚えた",
+    prev: "← 前", next: "次 →", fav: "☆ 保存", faved: "★ 保存済み",
+    listen: "🔊 聞く", learning: "練習中", learned: "覚えた",
+    quizPickKo: "韓国語を選んでください", quizPickJa: "意味を選んでください",
+    quizNext: "次の問題へ", correct: "正解です。", answerIs: a => "正解は「" + a + "」。",
+    retry: "もう一度テストする", rate: r => "正答率 " + r + "%",
+    res100: "完璧です。次のカテゴリへ進みましょう。",
+    res70: "いい調子です。間違えた分はカードで復習しましょう。",
+    res0: "一覧モードで音を聞きながら読み直すと定着します。",
+    auto: "▶ 連続再生", stop: "■ 停止",
+    vTarget: "韓国語のみ", vBoth: "韓国語＋日本語",
+    eAuto: "音声：自動", eLocal: "端末の音声", eGoogle: "Google音声",
+    aIdle: "行の🔊を押すと読み上げます",
+    aNoVoice: "端末に韓国語音声がないため、Google音声を使います",
+    aPlay: t => "再生中：" + t,
+    aFail: "音声を再生できませんでした。「?」を押してください",
+    aQuiz: "テスト中は連続再生できません",
+    help: "<b>音声が出ないときは</b><br>① 既定の「Google音声」はインターネット接続が必要です。オフラインなら「端末の音声」に切り替えてください。<br>② 端末に韓国語（日本語）の音声が入っていないと「端末の音声」では無音になります。Windowsは［設定］→［時刻と言語］→［言語と地域］で言語を追加し音声パックを入れてください。<br>③ プレビュー枠の中では音がブロックされることがあります。ファイルを保存して Chrome / Edge / Safari で直接開いてください。<br>④ 最初の再生は画面を一度タップした後に有効になります。<br><br><b>iPhoneで開くには</b><br>· 一番簡単：このファイルをiCloud Driveなどに保存 →［ファイル］アプリでタップ（そのまま表示され音声も動きます）。<br>· Safariで開きたい場合：［ファイル］アプリで共有ボタン →［Chrome］や［Edge］を選ぶ（Safariはローカルファイルを直接開けません）。<br>· 毎日使うなら：GitHub Pages や Netlify Drop などに置いてURLで開き、Safariの共有→［ホーム画面に追加］でアプリのように使えます。"
+  },
+  ko: {
+    sub: n => n + "개 문장 · 한국어로 배우는 일본어",
+    learner: "배울 언어 선택",
+    uiSubJa: "日本語で解説", uiSubKo: "한국어 안내",
+    dirLabel: "출제 방향",
+    dirA: "日本語 → 한국어", dirAs: "뜻을 떠올리기",
+    dirB: "한국어 → 日本語", dirBs: "일본어로 말해 보기",
+    mList: "목록으로 보기", mCard: "카드로 암기", mQuiz: "4지선다",
+    search: "일본어·발음·한국어로 검색",
+    mask: "정답 가리기", shuffle: "순서 섞기", tip: "해설 보기(일본어)",
+    reset: "기록 지우기", tipOn: "해설 보기", tipOff: "해설 숨기기", resetAsk: "'외웠어요'와 ★ 기록을 모두 지웁니다. 계속할까요?",
+    meter: (a,b) => "외운 문장 " + a + " / " + b,
+    count: (a,b) => "표시 " + a + "개 · ★" + b + "개",
+    footList: "★를 누르면 나만의 목록이 됩니다",
+    footCard: "스페이스로 열기 / ← →로 이동 / 1·2로 채점",
+    footQuiz: "10문제마다 결과가 나옵니다",
+    emptyT: "결과가 없습니다", emptyB: "검색어를 줄이거나 '전체' 카테고리로 돌아가 보세요.",
+    emptyQT: "문제를 만들 수 없습니다", emptyQB: "4개 이상 있는 카테고리를 선택해 주세요.",
+    hintT: "뜻을 떠올렸다면 열기", hintN: "일본어로 말할 수 있으면 열기",
+    open: "정답 보기", again: "다시", know: "외웠어요",
+    prev: "← 이전", next: "다음 →", fav: "☆ 저장", faved: "★ 저장됨",
+    listen: "🔊 듣기", learning: "연습 중", learned: "외운 문장",
+    quizPickKo: "한국어를 고르세요", quizPickJa: "일본어를 고르세요",
+    quizNext: "다음 문제", correct: "정답입니다.", answerIs: a => "정답은 '" + a + "'입니다.",
+    retry: "다시 풀기", rate: r => "정답률 " + r + "%",
+    res100: "완벽합니다. 다음 카테고리로 넘어가 보세요.",
+    res70: "좋습니다. 틀린 문장은 카드로 복습해 보세요.",
+    res0: "목록에서 소리를 들으며 다시 읽으면 오래 기억됩니다.",
+    auto: "▶ 연속 재생", stop: "■ 정지",
+    vTarget: "일본어만", vBoth: "일본어＋한국어",
+    eAuto: "음성: 자동", eLocal: "기기 음성", eGoogle: "구글 음성",
+    aIdle: "줄의 🔊를 누르면 읽어 줍니다",
+    aNoVoice: "기기에 일본어 음성이 없어 구글 음성을 사용합니다",
+    aPlay: t => "재생 중: " + t,
+    aFail: "소리를 재생할 수 없습니다. '?'를 눌러 주세요",
+    aQuiz: "시험 중에는 연속 재생을 쓸 수 없습니다",
+    help: "<b>소리가 나지 않을 때</b><br>① 기본값인 '구글 음성'은 인터넷 연결이 필요합니다. 오프라인이면 '기기 음성'으로 바꿔 주세요.<br>② 기기에 일본어(한국어) 음성이 없으면 '기기 음성'에서는 소리가 나지 않습니다. Windows는 [설정]→[시간 및 언어]→[언어 및 지역]에서 언어를 추가하고 음성 팩을 설치하세요.<br>③ 미리보기 창에서는 소리가 차단될 수 있습니다. 파일을 저장한 뒤 Chrome / Edge / Safari에서 직접 열어 주세요.<br>④ 첫 재생은 화면을 한 번 누른 뒤에 동작합니다.<br><br><b>아이폰에서 여는 방법</b><br>· 가장 쉬운 방법: 파일을 iCloud Drive에 저장한 뒤 [파일] 앱에서 탭하면 바로 열립니다.<br>· 사파리로 열고 싶다면: [파일] 앱에서 공유 버튼 → [Chrome]이나 [Edge] 선택(사파리는 로컬 파일을 직접 열 수 없습니다).<br>· 매일 쓰려면 GitHub Pages나 Netlify Drop에 올려 URL로 열고, 공유→[홈 화면에 추가]를 하면 앱처럼 쓸 수 있습니다."
+  }
+};
+
+const CATS = [
+  {key:"all",     ja:"すべて",        ko:"전체"},
+  {key:"fav",     ja:"★ 保存した分",  ko:"★ 저장한 문장"},
+  {key:"daily",   ja:"挨拶・基本",    ko:"인사·기본"},
+  {key:"life",    ja:"生活・毎日",    ko:"생활·일상"},
+  {key:"talk",    ja:"雑談・つなぎ",  ko:"대화·맞장구"},
+  {key:"friend",  ja:"友達・タメ口",  ko:"친구·반말"},
+  {key:"plan",    ja:"約束・連絡",    ko:"약속·연락"},
+  {key:"emotion", ja:"気持ち・相槌",  ko:"감정·리액션"},
+  {key:"food",    ja:"食事・カフェ",  ko:"식사·카페"},
+  {key:"travel",  ja:"旅行・買い物",  ko:"여행·쇼핑"},
+  {key:"kpop",    ja:"推し活・SNS",   ko:"덕질·SNS"},
+  {key:"lover",   ja:"恋人・親密",    ko:"연인·애정"},
+  {key:"biz",     ja:"ビジネス",      ko:"비즈니스"},
+  {key:"trouble", ja:"体調・トラブル",ko:"건강·트러블"},
+  {key:"word",    ja:"基本単語",      ko:"기초 단어"}
+];
+
+/* ==========================================================
+   4. 状態
+   ========================================================== */
+const mem = {};
+const store = {
+  get(k, d){
+    try{ const v = localStorage.getItem(k); return v === null ? (k in mem ? mem[k] : d) : JSON.parse(v); }
+    catch(e){ return k in mem ? mem[k] : d; }
+  },
+  set(k, v){ mem[k] = v; try{ localStorage.setItem(k, JSON.stringify(v)); }catch(e){} }
+};
+
+const S = {
+  ui: store.get("kj_ui", "ja"),
+  dir: "t2n",
+  mode: "list",
+  cat: "all",
+  q: "",
+  masked: false,
+  shuffled: false,
+  showTip: true,
+  favs: new Set(store.get("kj_favs", [])),
+  done: new Set(store.get("kj_done", [])),
+  revealed: new Set(),
+  order: [],
+  cardIdx: 0,
+  cardOpen: false,
+  quiz: null,
+  auto: false,
+  autoPos: 0,
+  audio: null
+};
+const $ = id => document.getElementById(id);
+const stage = $("stage");
+const esc = s => String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const t = () => T[S.ui];
+/* 解説は学習者の母語で出す */
+const tipOf = d => S.ui === "ja" ? d.tip : (d.tipKo || d.tip);
+
+/* 学習言語（target）＝ 学ぶ言語、母語（native）＝ 解説の言語 */
+const tLang = () => S.ui === "ja" ? "ko" : "ja";
+const nLang = () => S.ui === "ja" ? "ja" : "ko";
+
+function face(d, lang){
+  if(lang === "ko"){
+    return {
+      lang: "ko",
+      text: d.ko,
+      big: '<div class="ko">' + esc(d.ko) + '</div>' + (S.ui === "ja" ? '<div class="kana">' + esc(d.kana) + '</div>' : ""),
+      small: '<div class="plain ko-plain">' + esc(d.ko) + '</div>' + (S.ui === "ja" ? '<div class="kana">' + esc(d.kana) + '</div>' : ""),
+      cardBig: '<div class="card-q">' + esc(d.ko) + '</div>' + (S.ui === "ja" ? '<div class="card-sub">' + esc(d.kana) + '</div>' : ""),
+      cardSmall: '<div class="card-a"><span class="ko">' + esc(d.ko) + '</span></div>' + (S.ui === "ja" ? '<div class="card-sub">' + esc(d.kana) + '</div>' : ""),
+      opt: '<span class="opt-ko">' + esc(d.ko) + '</span>'
+    };
+  }
+  const hg = hangulize(markParticle(d.yomi, d.id));
+  const showYomi = d.yomi !== d.ja;   /* 漢字が無い行はふりがなを重ねて出さない */
+  const reading = S.ui === "ko"
+    ? (showYomi ? '<div class="kana">' + esc(d.yomi) + '</div>' : "") + '<div class="hang">' + esc(hg) + '</div>'
+    : "";
+  const cardReading = S.ui === "ko"
+    ? (showYomi ? '<div class="card-sub">' + esc(d.yomi) + '</div>' : "") + '<div class="card-sub h">' + esc(hg) + '</div>'
+    : "";
+  return {
+    lang: "ja",
+    text: d.ja,
+    big: '<div class="jp">' + esc(d.ja) + '</div>' + reading,
+    small: '<div class="plain">' + esc(d.ja) + '</div>',
+    cardBig: '<div class="card-q jp-q">' + esc(d.ja) + '</div>' + cardReading,
+    cardSmall: '<div class="card-a"><span class="jp">' + esc(d.ja) + '</span></div>' + cardReading,
+    opt: '<span class="opt-jp">' + esc(d.ja) + '</span>'
+  };
+}
+/* 出題面・解答面 */
+const frontLang = () => S.dir === "t2n" ? tLang() : nLang();
+const backLang  = () => S.dir === "t2n" ? nLang() : tLang();
+
+/* ==========================================================
+   5. 音声（端末TTS → 使えなければGoogle音声へ自動フォールバック）
+   ========================================================== */
+const Voices = {list: [], warned: false};
+function loadVoices(){
+  if(!window.speechSynthesis) return;
+  const v = window.speechSynthesis.getVoices();
+  if(v && v.length) Voices.list = v;
+}
+function findVoice(lang){
+  const p = lang === "ko" ? "ko" : "ja";
+  return Voices.list.find(v => String(v.lang || "").toLowerCase().replace("_","-").indexOf(p) === 0) || null;
+}
+if(window.speechSynthesis){
+  loadVoices();
+  window.speechSynthesis.onvoiceschanged = () => { loadVoices(); refreshAudioStatus(); };
+  [300, 1200, 2500].forEach(ms => setTimeout(() => { loadVoices(); refreshAudioStatus(); }, ms));
+}
+let unlocked = false;
+function unlockSpeech(){
+  if(unlocked || !window.speechSynthesis) return;
+  unlocked = true;
+  try{
+    const u = new SpeechSynthesisUtterance(" ");
+    u.volume = 0; window.speechSynthesis.speak(u);
+  }catch(e){}
+}
+document.addEventListener("pointerdown", unlockSpeech, {once:true});
+document.addEventListener("keydown", unlockSpeech, {once:true});
+
+function setStatus(msg, warn){
+  const el = $("audioStatus");
+  el.textContent = msg;
+  el.className = "grow" + (warn ? " warn" : "");
+}
+function refreshAudioStatus(){
+  if(S.auto) return;
+  const eng = $("engine").value;
+  if(eng === "local" && !findVoice(tLang())){ setStatus(t().aNoVoice, true); return; }
+  setStatus(t().aIdle, false);
+}
+
+function stopAudio(){
+  if(S.audio){ try{ S.audio.pause(); }catch(e){} S.audio = null; }
+  if(window.speechSynthesis){ try{ window.speechSynthesis.cancel(); }catch(e){} }
+}
+
+function speak(text, lang, done){
+  stopAudio();
+  const rate = parseFloat($("rate").value) || 1;
+  const eng = $("engine").value;
+  const clean = String(text).replace(/[／·]/g, " ").trim();
+  if(eng === "google") return googleSpeak(clean, lang, rate, done, () => localSpeak(clean, lang, rate, done, () => fail(done)));
+  if(eng === "local")  return localSpeak(clean, lang, rate, done, () => fail(done));
+  /* auto: 端末に音声があれば端末、無ければGoogle */
+  if(findVoice(lang)) return localSpeak(clean, lang, rate, done, () => googleSpeak(clean, lang, rate, done, () => fail(done)));
+  return googleSpeak(clean, lang, rate, done, () => localSpeak(clean, lang, rate, done, () => fail(done)));
+}
+function fail(done){
+  setStatus(t().aFail, true);
+  if(done) done();
+}
+
+function localSpeak(text, lang, rate, done, onFail){
+  if(!window.speechSynthesis){ return onFail && onFail(); }
+  const v = findVoice(lang);
+  const u = new SpeechSynthesisUtterance(text);
+  if(v) u.voice = v;
+  u.lang = v ? v.lang : (lang === "ko" ? "ko-KR" : "ja-JP");
+  u.rate = rate; u.volume = 1; u.pitch = 1;
+  let started = false, finished = false;
+  u.onstart = () => { started = true; setStatus(t().aPlay(text), false); };
+  u.onend = () => { if(finished) return; finished = true; if(done) done(); };
+  u.onerror = () => { if(finished) return; finished = true; onFail ? onFail() : (done && done()); };
+  try{ window.speechSynthesis.cancel(); }catch(e){}
+  setTimeout(() => {
+    try{ window.speechSynthesis.resume(); window.speechSynthesis.speak(u); }
+    catch(e){ if(!finished){ finished = true; onFail && onFail(); } }
+  }, 60);
+  setTimeout(() => {
+    if(!started && !finished){
+      finished = true;
+      try{ window.speechSynthesis.cancel(); }catch(e){}
+      onFail && onFail();
+    }
+  }, 1600);
+}
+
+function googleSpeak(text, lang, rate, done, onFail){
+  const tl = lang === "ko" ? "ko" : "ja";
+  const q = encodeURIComponent(text.replace(/[?!.,！？、。]/g, "").slice(0, 190));
+  const urls = [
+    "https://translate.googleapis.com/translate_tts?ie=UTF-8&client=gtx&tl=" + tl + "&q=" + q,
+    "https://translate.google.com/translate_tts?ie=UTF-8&client=tw-ob&tl=" + tl + "&q=" + q
+  ];
+  let idx = 0, finished = false;
+  const tryNext = () => {
+    if(finished) return;
+    if(idx >= urls.length){ finished = true; return onFail && onFail(); }
+    const a = new Audio(urls[idx++]);
+    S.audio = a;
+    a.playbackRate = rate;
+    a.onplaying = () => setStatus(t().aPlay(text), false);
+    a.onended = () => { if(finished) return; finished = true; S.audio = null; if(done) done(); };
+    a.onerror = tryNext;
+    a.play().catch(tryNext);
+  };
+  tryNext();
+}
+
+function speakItem(d, done){
+  const both = $("voiceMode").value === "both";
+  const tl = tLang(), nl = nLang();
+  const tText = tl === "ko" ? d.ko : d.ja;
+  const nText = nl === "ko" ? d.ko : d.ja;
+  if(!both) return speak(tText, tl, done);
+  if(S.dir === "t2n") speak(tText, tl, () => setTimeout(() => speak(nText, nl, done), 250));
+  else speak(nText, nl, () => setTimeout(() => speak(tText, tl, done), 250));
+}
+
+/* ==========================================================
+   6. 絞り込み
+   ========================================================== */
+function visible(){
+  const q = S.q.trim().toLowerCase();
+  let list = DATA.filter(d => {
+    const inCat = S.cat === "all" ? true : S.cat === "fav" ? S.favs.has(d.id) : d.cat === S.cat;
+    if(!inCat) return false;
+    if(!q) return true;
+    return (d.ko + d.kana + d.ja + d.tip + d.yomi + d.tipKo).toLowerCase().includes(q);
+  });
+  if(S.shuffled){
+    const pos = {};
+    S.order.forEach((id, i) => pos[id] = i);
+    list = list.slice().sort((a, b) => (pos[a.id] ?? 0) - (pos[b.id] ?? 0));
+  }
+  return list;
+}
+function reshuffle(){
+  S.order = DATA.map(d => d.id);
+  for(let i = S.order.length - 1; i > 0; i--){
+    const j = Math.floor(Math.random() * (i + 1));
+    [S.order[i], S.order[j]] = [S.order[j], S.order[i]];
+  }
+}
+
+/* ==========================================================
+   7. 描画
+   ========================================================== */
+function renderList(){
+  const list = visible();
+  if(!list.length){
+    stage.innerHTML = '<div class="empty"><b>' + t().emptyT + '</b>' + t().emptyB + '</div>';
+    return;
+  }
+  stage.innerHTML = list.map(d => {
+    const fav = S.favs.has(d.id), done = S.done.has(d.id);
+    const open = !S.masked || S.revealed.has(d.id);
+    const A = face(d, frontLang()), B = face(d, backLang());
+    const tip = (S.showTip && tipOf(d)) ? '<div class="tip">' + esc(tipOf(d)) + '</div>' : "";
+    const back = open
+      ? B.small + tip
+      : '<button class="mask" data-open="' + d.id + '">' + t().open + '</button>';
+    return '<article class="entry' + (done ? " done" : "") + '" id="e' + d.id + '">' +
+      '<div class="side"><button class="star' + (fav ? " on" : "") + '" data-fav="' + d.id + '" aria-label="save">' + (fav ? "★" : "☆") + '</button></div>' +
+      '<div class="a-cell">' + A.big + '</div>' +
+      '<div class="b-cell">' + back + '</div>' +
+      '<div class="side right"><button class="play" data-play="' + d.id + '" aria-label="play">🔊</button>' +
+      '<button class="chk' + (done ? " on" : "") + '" data-done="' + d.id + '" aria-label="learned">' + (done ? "✓" : "○") + '</button></div>' +
+      '</article>';
+  }).join("");
+}
+
+function renderCard(){
+  const list = visible();
+  if(!list.length){
+    stage.innerHTML = '<div class="empty"><b>' + t().emptyT + '</b>' + t().emptyB + '</div>';
+    return;
+  }
+  if(S.cardIdx >= list.length) S.cardIdx = 0;
+  const d = list[S.cardIdx];
+  const A = face(d, frontLang()), B = face(d, backLang());
+  const head = '<div class="card-idx">' + (S.cardIdx + 1) + ' / ' + list.length + '　·　' +
+               (S.done.has(d.id) ? t().learned : t().learning) + '</div>';
+  const body = S.cardOpen
+    ? A.cardBig + '<div class="card-rule"></div>' + B.cardSmall +
+      ((S.showTip && tipOf(d)) ? '<div class="card-tip">' + esc(tipOf(d)) + '</div>' : "")
+    : A.cardBig + '<div class="card-rule"></div><div class="card-hint">' +
+      (S.dir === "t2n" ? t().hintT : t().hintN) + '</div>';
+  stage.innerHTML =
+    '<div class="card-stage" id="flip">' + head + body + '</div>' +
+    (S.cardOpen
+      ? '<div class="card-bar"><button class="again" data-grade="0">' + t().again + '</button>' +
+        '<button class="know" data-grade="1">' + t().know + '</button>' +
+        '<button data-speak="' + d.id + '">' + t().listen + '</button></div>'
+      : '<div class="card-bar"><button class="dark" id="revealBtn">' + t().open + '</button>' +
+        '<button data-speak="' + d.id + '">' + t().listen + '</button></div>') +
+    '<div class="card-nav"><button data-step="-1">' + t().prev + '</button>' +
+    '<button data-step="1">' + t().next + '</button>' +
+    '<button data-fav="' + d.id + '">' + (S.favs.has(d.id) ? t().faved : t().fav) + '</button></div>';
+}
+
+function startQuiz(){
+  const pool = visible();
+  if(pool.length < 4){
+    stage.innerHTML = '<div class="empty"><b>' + t().emptyQT + '</b>' + t().emptyQB + '</div>';
+    S.quiz = null;
+    return;
+  }
+  const picked = pool.slice();
+  for(let i = picked.length - 1; i > 0; i--){
+    const j = Math.floor(Math.random() * (i + 1));
+    [picked[i], picked[j]] = [picked[j], picked[i]];
+  }
+  S.quiz = {
+    items: picked.slice(0, Math.min(10, picked.length)).map(d => {
+      const wrong = [], used = new Set([d.id]), texts = new Set([d.ja, d.ko]);
+      let guard = 0;
+      while(wrong.length < 3 && guard++ < 400){
+        const c = pool[Math.floor(Math.random() * pool.length)];
+        if(used.has(c.id) || texts.has(c.ja) || texts.has(c.ko)) continue;
+        used.add(c.id); texts.add(c.ja); texts.add(c.ko); wrong.push(c);
+      }
+      while(wrong.length < 3){
+        const c = pool[Math.floor(Math.random() * pool.length)];
+        if(used.has(c.id)) continue;
+        used.add(c.id); wrong.push(c);
+      }
+      const opts = [d, ...wrong];
+      for(let i = opts.length - 1; i > 0; i--){
+        const j = Math.floor(Math.random() * (i + 1));
+        [opts[i], opts[j]] = [opts[j], opts[i]];
+      }
+      return {d, opts};
+    }),
+    i: 0, score: 0, answered: false, chosen: null
+  };
+  renderQuiz();
+}
+
+function renderQuiz(){
+  const Q = S.quiz;
+  if(!Q){ return startQuiz(); }
+  if(Q.i >= Q.items.length){
+    const r = Math.round(Q.score / Q.items.length * 100);
+    stage.innerHTML = '<div class="quiz-stage"><div class="result">' +
+      '<div class="score">' + Q.score + '/' + Q.items.length + '</div>' +
+      '<p>' + t().rate(r) + '　' + (r === 100 ? t().res100 : r >= 70 ? t().res70 : t().res0) + '</p>' +
+      '<button class="btn-main" id="againBtn">' + t().retry + '</button></div></div>';
+    return;
+  }
+  const {d, opts} = Q.items[Q.i];
+  const A = face(d, frontLang());
+  const pickMsg = backLang() === "ko" ? t().quizPickKo : t().quizPickJa;
+  const qHead = A.cardBig.replace('class="card-q', 'class="quiz-q').replace('class="card-sub', 'class="quiz-sub') +
+                '<div class="quiz-sub">' + pickMsg + '</div>';
+  const body = opts.map(o => {
+    let cls = "opt";
+    if(Q.answered){
+      if(o.id === d.id) cls += " right";
+      else if(o.id === Q.chosen) cls += " wrong";
+    }
+    return '<button class="' + cls + '" data-opt="' + o.id + '"' + (Q.answered ? " disabled" : "") + '>' +
+           face(o, backLang()).opt + '</button>';
+  }).join("");
+  const answerText = backLang() === "ko" ? d.ko : d.ja;
+  const fb = Q.answered
+    ? '<div class="quiz-fb">' + (Q.chosen === d.id ? t().correct : t().answerIs(esc(answerText))) +
+      ((S.showTip && tipOf(d)) ? " " + esc(tipOf(d)) : "") + '</div>' +
+      '<div class="card-bar"><button class="know" id="nextQ">' + t().quizNext + '</button>' +
+      '<button data-speak="' + d.id + '">' + t().listen + '</button></div>'
+    : '<div class="quiz-fb"></div>';
+  stage.innerHTML = '<div class="quiz-stage">' +
+    '<div class="quiz-top"><span>' + (Q.i + 1) + ' / ' + Q.items.length + '</span><span>' +
+    (S.ui === "ja" ? "正解 " : "정답 ") + Q.score + '</span></div>' + qHead + body + fb + '</div>';
+}
+
+function render(){
+  if(S.mode === "list") renderList();
+  else if(S.mode === "card") renderCard();
+  else renderQuiz();
+  updateMeter();
+}
+function updateMeter(){
+  const list = visible();
+  const d = list.filter(x => S.done.has(x.id)).length;
+  $("meterLabel").textContent = t().meter(d, list.length);
+  $("meterFill").style.width = (list.length ? d / list.length * 100 : 0) + "%";
+  $("footRight").textContent = t().count(list.length, S.favs.size);
+}
+
+/* ==========================================================
+   8. UIテキストの反映
+   ========================================================== */
+function applyLang(){
+  const L = t();
+  document.documentElement.lang = S.ui === "ja" ? "ja" : "ko";
+  $("subtitle").textContent = L.sub(DATA.length);
+  $("lblLearner").textContent = L.learner;
+  $("uiSubJa").textContent = L.uiSubJa;
+  $("uiSubKo").textContent = L.uiSubKo;
+  $("lblDir").textContent = L.dirLabel;
+  $("dirA").textContent = L.dirA; $("dirAs").textContent = L.dirAs;
+  $("dirB").textContent = L.dirB; $("dirBs").textContent = L.dirBs;
+  const m = $("modeSwitch").children;
+  m[0].textContent = L.mList; m[1].textContent = L.mCard; m[2].textContent = L.mQuiz;
+  $("q").placeholder = L.search;
+  $("maskBtn").textContent = L.mask;
+  $("shuffleBtn").textContent = L.shuffle;
+  $("tipBtn").textContent = S.showTip ? L.tipOff : L.tipOn;
+  $("resetBtn").textContent = L.reset;
+  $("autoBtn").textContent = S.auto ? L.stop : L.auto;
+  const vm = $("voiceMode").children; vm[0].textContent = L.vTarget; vm[1].textContent = L.vBoth;
+  const en = $("engine").children; en[0].textContent = L.eGoogle; en[1].textContent = L.eAuto; en[2].textContent = L.eLocal;
+  $("helpPanel").innerHTML = L.help;
+  $("footLeft").textContent = S.mode === "card" ? L.footCard : S.mode === "quiz" ? L.footQuiz : L.footList;
+  [...$("cats").children].forEach(b => {
+    const c = CATS.find(x => x.key === b.dataset.cat);
+    if(c) b.textContent = c[S.ui];
+  });
+  refreshAudioStatus();
+}
+
+/* ==========================================================
+   9. 操作
+   ========================================================== */
+function toggleFav(id){
+  S.favs.has(id) ? S.favs.delete(id) : S.favs.add(id);
+  store.set("kj_favs", [...S.favs]);
+  render();
+}
+function toggleDone(id){
+  S.done.has(id) ? S.done.delete(id) : S.done.add(id);
+  store.set("kj_done", [...S.done]);
+  render();
+}
+function stepCard(n){
+  const len = visible().length;
+  if(!len) return;
+  S.cardIdx = (S.cardIdx + n + len) % len;
+  S.cardOpen = false;
+  render();
+}
+
+stage.addEventListener("click", e => {
+  const b = e.target.closest("button");
+  const item = id => DATA.find(d => d.id === Number(id));
+  if(!b){
+    if(S.mode === "card" && e.target.closest("#flip")){ S.cardOpen = !S.cardOpen; render(); }
+    return;
+  }
+  if(b.dataset.fav) return toggleFav(Number(b.dataset.fav));
+  if(b.dataset.done) return toggleDone(Number(b.dataset.done));
+  if(b.dataset.open){ S.revealed.add(Number(b.dataset.open)); return render(); }
+  if(b.dataset.play){
+    stopAuto();
+    document.querySelectorAll(".entry.playing").forEach(x => x.classList.remove("playing"));
+    const row = $("e" + b.dataset.play);
+    if(row) row.classList.add("playing");
+    return speakItem(item(b.dataset.play), () => row && row.classList.remove("playing"));
+  }
+  if(b.dataset.speak) return speakItem(item(b.dataset.speak));
+  if(b.id === "revealBtn"){ S.cardOpen = true; return render(); }
+  if(b.dataset.grade){
+    const d = visible()[S.cardIdx];
+    if(b.dataset.grade === "1") S.done.add(d.id); else S.done.delete(d.id);
+    store.set("kj_done", [...S.done]);
+    return stepCard(1);
+  }
+  if(b.dataset.step) return stepCard(Number(b.dataset.step));
+  if(b.dataset.opt && S.quiz && !S.quiz.answered){
+    const Q = S.quiz, cur = Q.items[Q.i];
+    Q.answered = true; Q.chosen = Number(b.dataset.opt);
+    if(Q.chosen === cur.d.id){ Q.score++; S.done.add(cur.d.id); store.set("kj_done", [...S.done]); }
+    renderQuiz(); updateMeter();
+    return speak(tLang() === "ko" ? cur.d.ko : cur.d.ja, tLang());
+  }
+  if(b.id === "nextQ"){ S.quiz.i++; S.quiz.answered = false; S.quiz.chosen = null; return renderQuiz(); }
+  if(b.id === "againBtn") return startQuiz();
+});
+
+$("cats").innerHTML = CATS.map(c =>
+  '<button data-cat="' + c.key + '" aria-pressed="' + (c.key === "all") + '"></button>').join("");
+$("cats").addEventListener("click", e => {
+  const b = e.target.closest("button"); if(!b) return;
+  stopAuto();
+  S.cat = b.dataset.cat; S.cardIdx = 0; S.cardOpen = false; S.quiz = null; S.revealed.clear();
+  [...$("cats").children].forEach(x => x.setAttribute("aria-pressed", x === b));
+  render();
+});
+
+$("uiSwitch").addEventListener("click", e => {
+  const b = e.target.closest("button"); if(!b) return;
+  stopAuto();
+  S.ui = b.dataset.ui; store.set("kj_ui", S.ui);
+  S.cardOpen = false; S.quiz = null; S.revealed.clear();
+  [...$("uiSwitch").children].forEach(x => x.setAttribute("aria-pressed", x === b));
+  $("tipBtn").setAttribute("aria-pressed", S.showTip);
+  applyLang();
+  render();
+});
+
+$("dirSwitch").addEventListener("click", e => {
+  const b = e.target.closest("button"); if(!b) return;
+  stopAuto();
+  S.dir = b.dataset.dir;
+  S.cardOpen = false; S.quiz = null; S.revealed.clear();
+  [...$("dirSwitch").children].forEach(x => x.setAttribute("aria-pressed", x === b));
+  render();
+});
+
+$("modeSwitch").addEventListener("click", e => {
+  const b = e.target.closest("button"); if(!b) return;
+  stopAuto();
+  S.mode = b.dataset.mode;
+  if(S.mode === "quiz") S.quiz = null;
+  [...$("modeSwitch").children].forEach(x => x.setAttribute("aria-pressed", x === b));
+  $("footLeft").textContent = S.mode === "card" ? t().footCard : S.mode === "quiz" ? t().footQuiz : t().footList;
+  render();
+});
+
+$("q").addEventListener("input", e => {
+  stopAuto();
+  S.q = e.target.value; S.cardIdx = 0; S.cardOpen = false; S.quiz = null;
+  render();
+});
+$("maskBtn").addEventListener("click", () => {
+  S.masked = !S.masked; S.revealed.clear();
+  $("maskBtn").setAttribute("aria-pressed", S.masked);
+  render();
+});
+$("shuffleBtn").addEventListener("click", () => {
+  S.shuffled = !S.shuffled;
+  if(S.shuffled) reshuffle();
+  $("shuffleBtn").setAttribute("aria-pressed", S.shuffled);
+  S.cardIdx = 0; S.cardOpen = false;
+  render();
+});
+$("tipBtn").addEventListener("click", () => {
+  S.showTip = !S.showTip;
+  $("tipBtn").setAttribute("aria-pressed", S.showTip);
+  $("tipBtn").textContent = S.showTip ? t().tipOff : t().tipOn;
+  render();
+});
+$("resetBtn").addEventListener("click", () => {
+  if(!confirm(t().resetAsk)) return;
+  S.done.clear(); S.favs.clear();
+  store.set("kj_done", []); store.set("kj_favs", []);
+  render();
+});
+$("helpBtn").addEventListener("click", () => $("helpPanel").classList.toggle("open"));
+
+/* ---------- 連続再生 ---------- */
+function stopAuto(){
+  S.auto = false;
+  stopAudio();
+  document.querySelectorAll(".entry.playing").forEach(x => x.classList.remove("playing"));
+  $("autoBtn").textContent = t().auto;
+  $("autoBtn").classList.remove("on");
+  refreshAudioStatus();
+}
+function startAuto(){
+  const list = visible();
+  if(!list.length) return;
+  S.auto = true;
+  S.autoPos = S.mode === "card" ? S.cardIdx : 0;
+  $("autoBtn").textContent = t().stop;
+  $("autoBtn").classList.add("on");
+  autoStep();
+}
+function autoStep(){
+  if(!S.auto) return;
+  const list = visible();
+  if(S.autoPos >= list.length) return stopAuto();
+  const d = list[S.autoPos];
+  if(S.mode === "list"){
+    document.querySelectorAll(".entry.playing").forEach(x => x.classList.remove("playing"));
+    const row = $("e" + d.id);
+    if(row){ row.classList.add("playing"); row.scrollIntoView({behavior:"smooth", block:"center"}); }
+  }else if(S.mode === "card"){
+    S.cardIdx = S.autoPos; S.cardOpen = true; render();
+  }
+  speakItem(d, () => {
+    if(!S.auto) return;
+    S.autoPos++;
+    setTimeout(autoStep, 550);
+  });
+}
+$("autoBtn").addEventListener("click", () => {
+  unlockSpeech();
+  if(S.mode === "quiz"){ setStatus(t().aQuiz, true); return; }
+  S.auto ? stopAuto() : startAuto();
+});
+["voiceMode","rate","engine"].forEach(id => $(id).addEventListener("change", () => { stopAuto(); refreshAudioStatus(); }));
+
+/* ---------- キーボード ---------- */
+document.addEventListener("keydown", e => {
+  if(e.target.tagName === "INPUT" || e.target.tagName === "SELECT") return;
+  if(S.mode !== "card") return;
+  if(e.code === "Space"){ e.preventDefault(); S.cardOpen = !S.cardOpen; render(); }
+  else if(e.key === "ArrowRight") stepCard(1);
+  else if(e.key === "ArrowLeft") stepCard(-1);
+  else if((e.key === "1" || e.key === "2") && S.cardOpen){
+    const d = visible()[S.cardIdx];
+    if(e.key === "1") S.done.add(d.id); else S.done.delete(d.id);
+    store.set("kj_done", [...S.done]);
+    stepCard(1);
+  }
+});
+
+/* ---------- 起動 ---------- */
+$("tipBtn").setAttribute("aria-pressed", S.showTip);
+[...$("uiSwitch").children].forEach(x => x.setAttribute("aria-pressed", x.dataset.ui === S.ui));
+reshuffle();
+applyLang();
+render();
+</script>
+</body>
+</html>
