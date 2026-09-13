@@ -1880,6 +1880,12 @@ const backLang  = () => S.dir === "t2n" ? nLang() : tLang();
 /* ==========================================================
    5. 音声（端末TTS → 使えなければGoogle音声へ自動フォールバック）
    ========================================================== */
+/* バックグラウンド再生中の音楽を止めずにフレーズ音声を重ねて再生するための設定
+   （AudioSession APIが無いブラウザでは単に無視される） */
+function setAmbientAudioSession(){
+  try{ if("audioSession" in navigator) navigator.audioSession.type = "ambient"; }catch(e){}
+}
+setAmbientAudioSession();
 const Voices = {list: [], warned: false};
 function loadVoices(){
   if(!window.speechSynthesis) return;
@@ -1897,6 +1903,7 @@ if(window.speechSynthesis){
 }
 let unlocked = false;
 function unlockSpeech(){
+  setAmbientAudioSession();
   if(unlocked || !window.speechSynthesis) return;
   unlocked = true;
   try{
@@ -1925,6 +1932,7 @@ function stopAudio(){
 }
 
 function speak(text, lang, done){
+  setAmbientAudioSession();
   stopAudio();
   const rate = parseFloat($("rate").value) || 1;
   const eng = $("engine").value;
